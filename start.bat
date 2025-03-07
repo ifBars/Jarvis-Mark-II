@@ -19,7 +19,7 @@ if %errorlevel% NEQ 0 (
 )
 
 REM Change directory to the original folder from which the script was launched
-cd /d "%ORIGINAL_PATH%"
+cd /d "%~dp0"
 
 REM ================================================
 REM Jarvis - Marvel Rivals AI Assistant
