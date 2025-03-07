@@ -2,6 +2,13 @@ import time
 import random
 import numpy as np
 import pyautogui
+import os
+import pygame
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from comtypes import CLSCTX_ALL
+from config import SOUNDS_DIR
+from music import skip_song, toggle_pause, play_music
+from obs_integration import stop_recording, start_recording, save_clip
 from pynput.keyboard import Key, Controller as KeyController, KeyCode
 from pynput.mouse import Controller as MouseController, Button
 from tasks import add_task
@@ -38,9 +45,6 @@ def freaky():
         time.sleep(0.05)
 
 def play_sound(sound):
-    import os
-    import pygame
-    from config import SOUNDS_DIR
     sound_path = os.path.join(SOUNDS_DIR, f"{sound}.mp3")
     if os.path.exists(sound_path):
         pygame.mixer.Sound(sound_path).play()
@@ -82,10 +86,6 @@ def typerandom(message):
         keyboard.release(char)
 
 def chat(message, target):
-    """
-    Send an in-game chat message.
-    'target': True for team chat, False for match chat.
-    """
     global onteam
     if target and not onteam:
         pyautogui.press("enter")
@@ -107,9 +107,6 @@ def chat(message, target):
         typerandom(message)
         pyautogui.press("enter")
 
-# Volume functions using pycaw.
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-from comtypes import CLSCTX_ALL
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 volume = interface.QueryInterface(IAudioEndpointVolume)
@@ -186,15 +183,12 @@ def process_command(response):
             add_task(insta_lock)
             i += 3
         elif response[i:i+4] == "clp;":
-            from obs_integration import save_clip
             add_task(save_clip)
             i += 3
         elif response[i:i+4] == "str;":
-            from obs_integration import start_recording
             add_task(start_recording)
             i += 3
         elif response[i:i+4] == "spr;":
-            from obs_integration import stop_recording
             add_task(stop_recording)
             i += 3
         elif response[i:i+4] == "mut;":
@@ -209,15 +203,12 @@ def process_command(response):
         elif response[i:i+4] == "mpl(":
             j = response.find(")", i)
             if j != -1:
-                from music import play_music
                 play_music(response[i+4:j])
                 i = j
         elif response[i:i+4] == "mps;":
-            from music import toggle_pause
             toggle_pause()
             i += 3
         elif response[i:i+4] == "skp;":
-            from music import skip_song
             skip_song()
             i += 3
         else:
