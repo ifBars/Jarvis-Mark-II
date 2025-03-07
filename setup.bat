@@ -15,17 +15,21 @@ python --version >nul 2>&1
 if errorlevel 1 (
     echo Python is not installed.
     echo Downloading Python installer...
-    REM Change the URL below to update the Python version as needed.
     powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.10.9/python-3.10.9-amd64.exe' -OutFile '%CD%\python_installer.exe'"
     
     echo Installing Python silently...
-    REM The following parameters install for all users and add Python to PATH.
     start /wait %CD%\python_installer.exe /quiet InstallAllUsers=1 PrependPath=1
+
+    REM Update PATH by reading the current system environment variable from the registry.
+    for /f "tokens=2,*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path 2^>nul') do (
+        set "PATH=%%B"
+    )
     
-    REM Check if installation succeeded
+    REM Recheck Python installation now that PATH is refreshed
     python --version >nul 2>&1
     if errorlevel 1 (
-        echo ERROR: Python installation failed.
+        echo ERROR: Python installation failed or PATH is not updated.
+        echo Please close and reopen this script in a new command prompt.
         pause
         exit /b 1
     ) else (
