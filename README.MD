@@ -11,7 +11,15 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 - **External Configuration:** All settings (e.g., API keys, OBS info, Vosk model paths) are managed via a single `config.ini` file.
 - **Modular Design:** Code is split into modules (`config.py`, `audio.py`, `chat.py`, `commands.py`, etc.) to simplify contributions and future extensions.
 
-## Installation
+## Mark 2.0 Installation Google Doc
+
+The installation guide for **Mark 2.0** is available in the Google Doc linked below:
+
+[View the Google Doc](https://docs.google.com/document/d/1STOtrWikkjOU_NCjUmY4COfTySb01chrkCE3kcUkTGU/edit?usp=sharing)
+
+*Created by cyburak*
+
+## Mark 2.1 Installation
 
 1. **Download the Repository:**
    - **With Git:**  
