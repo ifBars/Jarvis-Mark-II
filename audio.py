@@ -9,14 +9,20 @@ import pyaudio
 import json
 import config
 
-# Initialize pyttsx3 engine and set voice.
 engine = pyttsx3.init()
 pygame.mixer.init()
-print(f"[DEBUG] Using {config.VOICE_KEY} voice for tts")
 voices = engine.getProperty('voices')
-for v in voices:
-    print(v.id)
-engine.setProperty('voice', config.VOICE_KEY)
+
+matching_voice = None
+for voice in voices:
+    if voice.id.lower() == config.VOICE_KEY.lower():
+        matching_voice = voice.id
+        break
+
+if matching_voice is None:
+    matching_voice = r"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enUS_DavidM"
+
+engine.setProperty('voice', matching_voice)
 speech_channel = pygame.mixer.Channel(1)
 
 def speak(text, rate=170, pitch_factor=0.98):
@@ -42,7 +48,6 @@ def speak(text, rate=170, pitch_factor=0.98):
             time.sleep(0.1)
     threading.Thread(target=_speak, daemon=True).start()
 
-# Set up Vosk model and PyAudio stream.
 vosk_model = Model(config.VOSK_MODEL_PATH)
 recognizer = KaldiRecognizer(vosk_model, 16000)
 mic = pyaudio.PyAudio()
