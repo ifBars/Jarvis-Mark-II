@@ -13,18 +13,22 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 
 ## Installation
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/ifBars/Jarvis-Mark-II.git
-   cd Jarvis-Mark-II
-   ```
+1. **Download the Repository:**
+   - **With Git:**  
+     If you have Git installed, clone the repository by running:
+     ```bash
+     git clone https://github.com/ifBars/Jarvis-Mark-II.git
+     cd Jarvis-Mark-II
+     ```
+   - **Without Git:**  
+     If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/ifBars/Jarvis-Mark-II) and extract it.
 
-2. **Run the setup and follow the process:**
+2. **Run the Setup:**
    ```bash
    setup.bat
    ```
 
-3. **Run start.bat to start Jarvis:**
+3. **Start Jarvis:**
    ```bash
    start.bat
    ```
