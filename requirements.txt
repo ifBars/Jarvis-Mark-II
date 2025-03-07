@@ -1,0 +1,12 @@
+vosk
+pyaudio
+google-generativeai
+pyttsx3
+pynput
+numpy
+pyautogui
+obs-websocket-py
+pycaw
+pygame
+pydub
+ffmpeg
