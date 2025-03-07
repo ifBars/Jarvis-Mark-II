@@ -32,11 +32,13 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
      If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/ifBars/Jarvis-Mark-II) and extract it.
 
 2. **Run the Setup:**
+   DO NOT RUN AS ADMIN, IT WILL PROMPT YOU FOR ADMIN WHEN NEEDED
    ```bash
    setup.bat
    ```
 
 3. **Start Jarvis:**
+   DO NOT RUN AS ADMIN, IT WILL PROMPT YOU FOR ADMIN WHEN NEEDED
    ```bash
    start.bat
    ```
