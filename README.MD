@@ -51,4 +51,5 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 2. **No module named pynput**
    - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error, jarvis folder, and config.ini
 
-3. 
+3. **No such file or directory**
+   - Usually this means your base_dir in config.ini is not set correctly, you can try running setup.bat again, or setting the base_dir manually.
