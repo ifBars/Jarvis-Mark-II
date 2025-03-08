@@ -9,4 +9,5 @@ obs-websocket-py
 pycaw
 pygame
 pydub
+audioop-lts
 ffmpeg
