@@ -1,6 +1,5 @@
 import threading
 import queue
-import time
 
 task_queue = queue.Queue()
 
@@ -9,11 +8,16 @@ def task_worker():
         func, args = task_queue.get()
         if func is None:
             break
-        func(*args)
+        
+        if (isinstance(args, tuple)):
+            func(*args)
+        else:
+            func(args)
+            
         task_queue.task_done()
 
 worker_thread = threading.Thread(target=task_worker, daemon=True)
 worker_thread.start()
 
-def add_task(func, *args):
+def add_task(func, args):
     task_queue.put((func, args))
