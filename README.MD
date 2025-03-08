@@ -29,7 +29,7 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
      cd Jarvis-Mark-II
      ```
    - **Without Git:**  
-     If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/PatchiPup/Jarvis-Mark-II) and extract it.
+     If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/PatchiPup/Jarvis-Mark-II/archive/refs/heads/main.zip) and extract it.
 
 2. **Run the Setup:**
    DO NOT RUN AS ADMIN, IT WILL PROMPT YOU FOR ADMIN WHEN NEEDED
