@@ -53,3 +53,6 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 3. **No such file or directory**
    - Usually this means your base_dir in config.ini is not set correctly, you can try running setup.bat again, or setting the base_dir manually.
+
+4. **Could not find a version that satisfies the requirement audioop-lts**
+   - This means you are on python 3.12 or earlier, and do not need to install audioop-lts
