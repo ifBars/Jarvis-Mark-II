@@ -19,8 +19,10 @@ onteam = True
 
 def fireshots(n):
     for _ in range(n):
-        press('o')
-        time.sleep(0.7)
+        pyautogui.mouseDown(button='left')
+        time.sleep(0.05)
+        pyautogui.mouseUp(button='left')
+        time.sleep(0.5)
 
 def unibeam(n):
     pyautogui.mouseDown(button='right')

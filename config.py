@@ -3,13 +3,14 @@ import configparser
 import google.generativeai as genai
 
 # Load configuration from config.ini
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(inline_comment_prefixes=('#', ';'))
 config.read('config.ini')
 
 # General settings
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
+INPUT_START_KEY = config['InputListener']['talk_key']
 
 # Vosk settings
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
