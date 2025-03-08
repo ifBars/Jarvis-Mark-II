@@ -19,16 +19,16 @@ if %errorlevel% NEQ 0 (
 )
 
 REM Change directory to the original folder from which the script was launched
-cd /d "%ORIGINAL_PATH%"
+cd /d "%~dp0"
 
 REM ================================================
-REM Jarvis - Marvel Rivals AI Assistant
-REM Modularized version by ifBars (based on Patchi's Mark 2)
+REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant
+REM Modularized by ifBars (based on Patchi's Mark 2)
 REM ================================================
 
 echo ================================================
-echo Jarvis - Marvel Rivals AI Assistant
-echo Modularized version by ifBars (based on Patchi's Mark 2)
+echo Jarvis Mark 2.1 - Marvel Rivals AI Assistant
+echo Modularized by ifBars (based on Patchi's Mark 2)
 echo ================================================
 
 python main.py

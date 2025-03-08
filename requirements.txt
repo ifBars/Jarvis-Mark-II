@@ -9,5 +9,6 @@ obs-websocket-py
 pycaw
 pygame
 pydub
-audioop-lts
+audioop-lts; python_version>='3.13'
+SpeechRecognition
 ffmpeg
