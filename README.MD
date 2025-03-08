@@ -25,11 +25,11 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
    - **With Git:**  
      If you have Git installed, clone the repository by running:
      ```bash
-     git clone https://github.com/ifBars/Jarvis-Mark-II.git
+     git clone https://github.com/PatchiPup/Jarvis-Mark-II.git
      cd Jarvis-Mark-II
      ```
    - **Without Git:**  
-     If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/ifBars/Jarvis-Mark-II) and extract it.
+     If you don't have Git, simply download the repository as a **.zip** file from the [GitHub page](https://github.com/PatchiPup/Jarvis-Mark-II/archive/refs/heads/main.zip) and extract it.
 
 2. **Run the Setup:**
    DO NOT RUN AS ADMIN, IT WILL PROMPT YOU FOR ADMIN WHEN NEEDED
@@ -42,3 +42,17 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
    ```bash
    start.bat
    ```
+
+## Common Installation Issues
+
+1. **No module named 'audioop'**
+   - Any error relating to audioop, usually arises when you are using the latest version of python, 3.13, as audioop was removed from python in this version. This means if you are using python 3.13 or later, you will need to install [audioop-lts](https://pypi.org/project/audioop-lts/). The setup.bat should handle this for you, but in the case it doesn't and you get an audioop error, this is why, and installing it via pip should fix your issue.
+  
+2. **No module named pynput**
+   - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error, jarvis folder, and config.ini
+
+3. **No such file or directory**
+   - Usually this means your base_dir in config.ini is not set correctly, you can try running setup.bat again, or setting the base_dir manually.
+
+4. **Could not find a version that satisfies the requirement audioop-lts**
+   - This means you are on python 3.12 or earlier, and do not need to install audioop-lts

@@ -19,16 +19,17 @@ if %errorlevel% NEQ 0 (
 )
 
 REM Change directory to the original folder from which the script was launched
-cd /d "%ORIGINAL_PATH%"
+cd /d "%~dp0"
+set "ORIGINAL_PATH=%~dp0"
 
 REM ================================================
-REM Jarvis - Marvel Rivals AI Assistant Setup Script
-REM Modularized version by ifBars (based on Patchi's Mark 2)
+REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant Setup Script
+REM Modularized by ifBars (based on Patchi's Mark 2)
 REM ================================================
 
 echo ================================================
-echo Jarvis - Marvel Rivals AI Assistant Setup
-echo Modularized version by ifBars (based on Patchi's Mark 2)
+echo Jarvis Mark 2.1 - Marvel Rivals AI Assistant Setup
+echo Modularized by ifBars (based on Patchi's Mark 2)
 echo ================================================
 
 REM Check if Python is installed
@@ -73,13 +74,34 @@ if errorlevel 1 (
 echo.
 
 REM ====================================================
+REM Ask User to Select Speech Engine (vosk or speech_recognition)
+REM ====================================================
+echo Please select which speech engine you want to use:
+echo 1^) Vosk
+echo 2^) Speech Recognition
+choice /c:12 /m "Enter your choice (1-2):"
+set "ENGINE_CHOICE=%errorlevel%"
+
+if "%ENGINE_CHOICE%"=="1" (
+    set "SPEECH_ENGINE=vosk"
+    goto VoskModelSelection
+) else (
+    set "SPEECH_ENGINE=speech_recognition"
+    goto Dependencies
+)
+
+:VoskModelSelection
+echo.
+echo You have chosen Vosk as your speech engine.
+echo.
+REM ====================================================
 REM VOSK Model Download Section with Selection Menu
 REM ====================================================
 echo Please select which Vosk model you want to download:
 echo 1^) vosk-model-small-en-us-0.15 (40MB)
-echo 2^) vosk-model-small-en-us-0.22 (1.8GB)
-echo 3^) vosk-model-en-us-0.22 (128MB)
-echo 4^) vosk-model-large-en-us-0.22 (2.3GB)
+echo 2^) vosk-model-en-us-0.22 (1.8GB)
+echo 3^) vosk-model-en-us-0.22-lgraph (128MB)
+echo 4^) vosk-model-en-us-0.42-gigaspeech (2.3GB)
 echo 5^) Skip (I will download it manually)
 choice /c:12345 /m "Enter your choice (1-5):"
 set "MODEL_CHOICE=%errorlevel%"
@@ -95,18 +117,18 @@ if "%MODEL_CHOICE%"=="1" (
     goto DownloadModel
 )
 if "%MODEL_CHOICE%"=="2" (
-    set "VOSK_MODEL_FOLDER=vosk-model-small-en-us-0.22"
-    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.22.zip"
-    goto DownloadModel
-)
-if "%MODEL_CHOICE%"=="3" (
     set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.22"
     set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
     goto DownloadModel
 )
+if "%MODEL_CHOICE%"=="3" (
+    set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.22-lgraph"
+    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip"
+    goto DownloadModel
+)
 if "%MODEL_CHOICE%"=="4" (
-    set "VOSK_MODEL_FOLDER=vosk-model-large-en-us-0.22"
-    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-large-en-us-0.22.zip"
+    set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.42-gigaspeech"
+    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip"
     goto DownloadModel
 )
 
@@ -155,11 +177,13 @@ if exist "%ORIGINAL_PATH%\config.ini" (
     REM Update base_dir to the ORIGINAL_PATH
     powershell -Command "(Get-Content '%ORIGINAL_PATH%\config.ini') -replace '^base_dir\s*=.*$', 'base_dir = %ORIGINAL_PATH%' | Set-Content '%ORIGINAL_PATH%\config.ini'"
     
+    REM Update speech engine setting
+    powershell -Command "(Get-Content '%ORIGINAL_PATH%\config.ini') -replace '^engine\s*=.*$', 'engine = %SPEECH_ENGINE%' | Set-Content '%ORIGINAL_PATH%\config.ini'"
+    
     REM Only update model_path if a Vosk model was downloaded (i.e. VOSK_MODEL_FOLDER is defined)
     if defined VOSK_MODEL_FOLDER (
         REM Build the full path to the model folder
-        set "VOSK_MODEL=%VOSK_MODEL_FOLDER% "
-        REM Using delayed expansion to substitute the variable inside the PowerShell command
+        set "VOSK_MODEL=%VOSK_MODEL_FOLDER%"
         powershell -Command "(Get-Content '%ORIGINAL_PATH%\config.ini') -replace '^model_path\s*=.*$', 'model_path = !VOSK_MODEL!' | Set-Content '%ORIGINAL_PATH%\config.ini'"
     )
     echo config.ini updated successfully.
