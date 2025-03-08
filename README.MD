@@ -1,5 +1,20 @@
 # Jarvis – Marvel Rivals AI Assistant
 
+## Table of Contents
+- [Jarvis – Marvel Rivals AI Assistant](#jarvis--marvel-rivals-ai-assistant)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Installation Guides](#installation-guides)
+    - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
+    - [Mark 2.1 Installation](#mark-21-installation)
+  - [Common Installation Issues](#common-installation-issues)
+  - [Changelog](#changelog)
+
+---
+
+## Overview
+
 Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system. Originally created by Patchi ([PatchiPup](https://www.youtube.com/@PatchiPup)), this project has been refactored to improve maintainability and extensibility. It now uses a modular design with separate files for configuration, audio processing, command parsing, and more.
 
 ## Features
@@ -11,7 +26,9 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 - **External Configuration:** All settings (e.g., API keys, OBS info, Vosk model paths) are managed via a single `config.ini` file.
 - **Modular Design:** Code is split into modules (`config.py`, `audio.py`, `chat.py`, `commands.py`, etc.) to simplify contributions and future extensions.
 
-## Mark 2.0 Installation Google Doc
+## Installation Guides
+
+### Mark 2.0 Installation Google Doc
 
 The installation guide for **Mark 2.0** is available in the Google Doc linked below:
 
@@ -19,11 +36,10 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 *Created by cyburak*
 
-## Mark 2.1 Installation
+### Mark 2.1 Installation
 
 1. **Download the Repository:**
    - **With Git:**  
-     If you have Git installed, clone the repository by running:
      ```bash
      git clone https://github.com/PatchiPup/Jarvis-Mark-II.git
      cd Jarvis-Mark-II
@@ -45,7 +61,7 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 ## Common Installation Issues
 
-1. **No module named 'audioop'**
+1. **No module named audioop**
    - Any error relating to audioop, usually arises when you are using the latest version of python, 3.13, as audioop was removed from python in this version. This means if you are using python 3.13 or later, you will need to install [audioop-lts](https://pypi.org/project/audioop-lts/). The setup.bat should handle this for you, but in the case it doesn't and you get an audioop error, this is why, and installing it via pip should fix your issue.
   
 2. **No module named pynput**
@@ -56,3 +72,7 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 4. **Could not find a version that satisfies the requirement audioop-lts**
    - This means you are on python 3.12 or earlier, and do not need to install audioop-lts
+
+## Changelog
+
+For a detailed list of changes and updates, please refer to the [CHANGELOG.md](CHANGELOG.md) file.
