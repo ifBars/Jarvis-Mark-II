@@ -2,7 +2,7 @@ from input_listener import is_t_pressed
 from audio import process_audio, speak, close_audio
 from chat import send_to_jarvis
 from exit import should_exit
-from commands import process_command, play_sound
+from commands import process_command
 from config import INPUT_START_KEY
 
 def main():
