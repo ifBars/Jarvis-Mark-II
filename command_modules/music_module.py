@@ -11,16 +11,27 @@ music_queue = []
 current_song_index = 0
 playing = False
 
+def get_playlists():
+    """Return a list of folder names in MUSIC_DIR (each representing a playlist)."""
+    try:
+        return [d for d in os.listdir(MUSIC_DIR) if os.path.isdir(os.path.join(MUSIC_DIR, d))]
+    except Exception as e:
+        print("Error reading MUSIC_DIR:", e)
+        return []
+
+# Dynamically list available playlists in the commands string.
+available_playlists = ", ".join(get_playlists())
+
 command_handlers = {
     "skp": lambda _: (skip_song, ()),
     "mps": lambda _: (toggle_pause, ()),
-    "mpl": lambda content: (play_music, (content))
+    "mpl": lambda content: (play_music, (content,))
 }
 
-commands_string = """
- mpl(name)   - Start a music playlist (Playlist1 or Playlist2)  
- mps()        - Pause or resume music  
- skp()        - Skip the current song 
+commands_string = f"""
+ mpl(name)   - Start a music playlist. Available playlists: {available_playlists}
+ mps()       - Pause or resume music  
+ skp()       - Skip the current song 
 """
 
 def music_thread(folder):
@@ -42,9 +53,12 @@ def music_thread(folder):
                         return
                 current_song_index = (current_song_index + 1) % len(music_queue)
     else:
-        print("Music folder doesn't exist. Check your config.")
+        print("Playlist not found. Available playlists:", ", ".join(get_playlists()))
 
 def play_music(folder):
+    if folder not in get_playlists():
+        print(f"Playlist '{folder}' not found. Available playlists: {', '.join(get_playlists())}")
+        return
     threading.Thread(target=music_thread, args=(folder,), daemon=True).start()
 
 def toggle_pause():
