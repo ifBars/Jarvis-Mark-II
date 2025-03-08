@@ -19,8 +19,10 @@ onteam = True
 
 def fireshots(n):
     for _ in range(n):
-        press('o')
-        time.sleep(0.7)
+        pyautogui.mouseDown(button='left')
+        time.sleep(0.05)
+        pyautogui.mouseUp(button='left')
+        time.sleep(0.5)
 
 def unibeam(n):
     pyautogui.mouseDown(button='right')
@@ -50,7 +52,9 @@ def play_sound(sound):
         pygame.mixer.Sound(sound_path).play()
 
 def insta_lock():
-    tx, ty = 1800, 650
+    screen_width, screen_height = pyautogui.size()
+    tx = int(screen_width * 1800 / 1920)
+    ty = int(screen_height * 650 / 1080)
     duration = 0.3
     steps = 30
     sx, sy = mouse.position
