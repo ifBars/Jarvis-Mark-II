@@ -77,9 +77,9 @@ REM VOSK Model Download Section with Selection Menu
 REM ====================================================
 echo Please select which Vosk model you want to download:
 echo 1^) vosk-model-small-en-us-0.15 (40MB)
-echo 2^) vosk-model-small-en-us-0.22 (1.8GB)
-echo 3^) vosk-model-en-us-0.22 (128MB)
-echo 4^) vosk-model-large-en-us-0.22 (2.3GB)
+echo 2^) vosk-model-en-us-0.22 (1.8GB)
+echo 3^) vosk-model-en-us-0.22-lgraph (128MB)
+echo 4^) vosk-model-en-us-0.42-gigaspeech (2.3GB)
 echo 5^) Skip (I will download it manually)
 choice /c:12345 /m "Enter your choice (1-5):"
 set "MODEL_CHOICE=%errorlevel%"
@@ -95,18 +95,18 @@ if "%MODEL_CHOICE%"=="1" (
     goto DownloadModel
 )
 if "%MODEL_CHOICE%"=="2" (
-    set "VOSK_MODEL_FOLDER=vosk-model-small-en-us-0.22"
-    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.22.zip"
-    goto DownloadModel
-)
-if "%MODEL_CHOICE%"=="3" (
     set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.22"
     set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
     goto DownloadModel
 )
+if "%MODEL_CHOICE%"=="3" (
+    set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.22-lgraph"
+    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip"
+    goto DownloadModel
+)
 if "%MODEL_CHOICE%"=="4" (
-    set "VOSK_MODEL_FOLDER=vosk-model-large-en-us-0.22"
-    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-large-en-us-0.22.zip"
+    set "VOSK_MODEL_FOLDER=vosk-model-en-us-0.42-gigaspeech"
+    set "VOSK_MODEL_URL=https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip"
     goto DownloadModel
 )
 
