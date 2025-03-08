@@ -6,8 +6,8 @@
   - [Overview](#overview)
   - [Features](#features)
   - [Installation Guides](#installation-guides)
+    - [Mark 2.1 Installation (GitHub Version)](#mark-21-installation)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
-    - [Mark 2.1 Installation](#mark-21-installation)
   - [Common Installation Issues](#common-installation-issues)
   - [Changelog](#changelog)
 
