@@ -7,6 +7,7 @@ all_commands_str = ""
 additional_info_str = ""
 
 # Iterate over all modules in the handlers package
+print("Loaded command modules:")
 for _, module_name, _ in pkgutil.iter_modules(command_modules.__path__, command_modules.__name__ + "."):
     module = importlib.import_module(module_name)
     print(module_name)
