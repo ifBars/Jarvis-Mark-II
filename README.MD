@@ -6,7 +6,7 @@
   - [Overview](#overview)
   - [Features](#features)
   - [Installation Guides](#installation-guides)
-    - [Mark 2.1 Installation (GitHub Version)](#mark-21-installation)
+    - [Mark 2.1 Installation](#mark-21-installation)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
   - [Common Installation Issues](#common-installation-issues)
   - [Changelog](#changelog)
@@ -27,14 +27,6 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 - **Modular Design:** Code is split into modules (`config.py`, `audio.py`, `chat.py`, `commands.py`, etc.) to simplify contributions and future extensions.
 
 ## Installation Guides
-
-### Mark 2.0 Installation Google Doc
-
-The installation guide for **Mark 2.0** is available in the Google Doc linked below:
-
-[View the Google Doc](https://docs.google.com/document/d/1STOtrWikkjOU_NCjUmY4COfTySb01chrkCE3kcUkTGU/edit?usp=sharing)
-
-*Created by cyburak*
 
 ### Mark 2.1 Installation
 
@@ -58,6 +50,14 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
    ```bash
    start.bat
    ```
+
+### Mark 2.0 Installation Google Doc
+
+The installation guide for **Mark 2.0** is available in the Google Doc linked below:
+
+[View the Google Doc](https://docs.google.com/document/d/1STOtrWikkjOU_NCjUmY4COfTySb01chrkCE3kcUkTGU/edit?usp=sharing)
+
+*Created by cyburak*
 
 ## Common Installation Issues
 
