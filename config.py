@@ -14,6 +14,9 @@ VOICE_KEY = config['General']['voice_key']
 # Vosk settings
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 
+# Speech engine selection
+SPEECH_ENGINE = config['Speech']['engine'].lower()
+
 # OBS settings
 OBS_HOST = config['OBS']['host']
 OBS_PORT = int(config['OBS']['port'])

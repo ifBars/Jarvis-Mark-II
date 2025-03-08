@@ -4,11 +4,10 @@ import time
 import pyttsx3
 import pygame
 from pydub import AudioSegment
-from vosk import Model, KaldiRecognizer
-import pyaudio
 import json
 import config
 
+# Initialize text-to-speech
 engine = pyttsx3.init()
 pygame.mixer.init()
 voices = engine.getProperty('voices')
@@ -18,7 +17,6 @@ for voice in voices:
     if voice.id.lower() == config.VOICE_KEY.lower():
         matching_voice = voice.id
         break
-
 if matching_voice is None:
     matching_voice = r"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enUS_DavidM"
 
@@ -48,34 +46,89 @@ def speak(text, rate=170, pitch_factor=0.98):
             time.sleep(0.1)
     threading.Thread(target=_speak, daemon=True).start()
 
-vosk_model = Model(config.VOSK_MODEL_PATH)
-recognizer = KaldiRecognizer(vosk_model, 16000)
-mic = pyaudio.PyAudio()
-stream = mic.open(
-    format=pyaudio.paInt16,
-    channels=1,
-    rate=16000,
-    input=True,
-    frames_per_buffer=8192
-)
+# --- Speech Recognition Engine Setup ---
 
-def process_audio(is_t_pressed):
-    """
-    Capture audio while the T key is held.
-    Return the transcribed text.
-    """
-    audio_frames = []
-    while is_t_pressed():
-        data = stream.read(4096, exception_on_overflow=False)
-        audio_frames.append(data)
-    if audio_frames:
-        for frame in audio_frames:
-            recognizer.AcceptWaveform(frame)
-        result = json.loads(recognizer.FinalResult())
-        return result.get("text", "")
-    return None
+if config.SPEECH_ENGINE == "vosk":
+    from vosk import Model, KaldiRecognizer
+    import pyaudio
 
-def close_audio():
-    stream.stop_stream()
-    stream.close()
-    mic.terminate()
+    vosk_model = Model(config.VOSK_MODEL_PATH)
+    recognizer = KaldiRecognizer(vosk_model, 16000)
+    mic = pyaudio.PyAudio()
+    stream = mic.open(
+        format=pyaudio.paInt16,
+        channels=1,
+        rate=16000,
+        input=True,
+        frames_per_buffer=8192
+    )
+
+    def process_audio(is_t_pressed):
+        """
+        Capture audio while the T key is held.
+        Return the transcribed text using Vosk.
+        """
+        audio_frames = []
+        while is_t_pressed():
+            data = stream.read(4096, exception_on_overflow=False)
+            audio_frames.append(data)
+        if audio_frames:
+            for frame in audio_frames:
+                recognizer.AcceptWaveform(frame)
+            result = json.loads(recognizer.FinalResult())
+            return result.get("text", "")
+        return None
+
+    def close_audio():
+        stream.stop_stream()
+        stream.close()
+        mic.terminate()
+
+elif config.SPEECH_ENGINE == "speech_recognition":
+    import speech_recognition as sr
+
+    recognizer = sr.Recognizer()
+    microphone = sr.Microphone()
+
+    # Perform ambient noise adjustment once at startup to reduce delay during recording.
+    with microphone as source:
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+
+    def process_audio(is_t_pressed):
+        """
+        Capture audio while the T key is held, mimicking Vosk's behavior.
+        Records shorter 0.25-second chunks to reduce latency.
+        Combines the recorded chunks and transcribes the result using SpeechRecognition.
+        """
+        audio_chunks = []
+        with microphone as source:
+            while is_t_pressed():
+                try:
+                    # Record a short chunk of 0.25 seconds
+                    chunk = recognizer.record(source, duration=0.25)
+                    audio_chunks.append(chunk)
+                except Exception as e:
+                    print("Error capturing audio:", e)
+        if audio_chunks:
+            # Combine raw audio data from all chunks
+            combined_raw = b"".join(chunk.get_raw_data() for chunk in audio_chunks)
+            # Use sample_rate and sample_width from the first chunk
+            sample_rate = audio_chunks[0].sample_rate
+            sample_width = audio_chunks[0].sample_width
+            combined_audio = sr.AudioData(combined_raw, sample_rate, sample_width)
+            try:
+                text = recognizer.recognize_google(combined_audio)
+                return text
+            except sr.UnknownValueError:
+                return ""
+            except sr.RequestError as e:
+                print("Could not request results; {0}".format(e))
+                return ""
+        return None
+
+    def close_audio():
+        # No explicit closing needed for SpeechRecognition.
+        pass
+
+else:
+    raise ValueError("Invalid speech engine specified in config.ini. Choose 'vosk' or 'speech_recognition'.")
