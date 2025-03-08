@@ -50,7 +50,9 @@ def play_sound(sound):
         pygame.mixer.Sound(sound_path).play()
 
 def insta_lock():
-    tx, ty = 1800, 650
+    screen_width, screen_height = pyautogui.size()
+    tx = int(screen_width * 1800 / 1920)
+    ty = int(screen_height * 650 / 1080)
     duration = 0.3
     steps = 30
     sx, sy = mouse.position
