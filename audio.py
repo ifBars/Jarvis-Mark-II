@@ -7,7 +7,6 @@ from pydub import AudioSegment
 import json
 import config
 
-# Initialize text-to-speech
 engine = pyttsx3.init()
 pygame.mixer.init()
 voices = engine.getProperty('voices')
@@ -45,8 +44,6 @@ def speak(text, rate=170, pitch_factor=0.98):
         while speech_channel.get_busy():
             time.sleep(0.1)
     threading.Thread(target=_speak, daemon=True).start()
-
-# --- Speech Recognition Engine Setup ---
 
 if config.SPEECH_ENGINE == "vosk":
     from vosk import Model, KaldiRecognizer
@@ -90,7 +87,6 @@ elif config.SPEECH_ENGINE == "speech_recognition":
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
 
-    # Perform ambient noise adjustment once at startup to reduce delay during recording.
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source, duration=0.5)
 
@@ -104,15 +100,12 @@ elif config.SPEECH_ENGINE == "speech_recognition":
         with microphone as source:
             while is_t_pressed():
                 try:
-                    # Record a short chunk of 0.25 seconds
                     chunk = recognizer.record(source, duration=0.25)
                     audio_chunks.append(chunk)
                 except Exception as e:
                     print("Error capturing audio:", e)
         if audio_chunks:
-            # Combine raw audio data from all chunks
             combined_raw = b"".join(chunk.get_raw_data() for chunk in audio_chunks)
-            # Use sample_rate and sample_width from the first chunk
             sample_rate = audio_chunks[0].sample_rate
             sample_width = audio_chunks[0].sample_width
             combined_audio = sr.AudioData(combined_raw, sample_rate, sample_width)
@@ -127,7 +120,6 @@ elif config.SPEECH_ENGINE == "speech_recognition":
         return None
 
     def close_audio():
-        # No explicit closing needed for SpeechRecognition.
         pass
 
 else:
