@@ -105,8 +105,6 @@ Jarvis/
 
 Each language folder contains an `LC_MESSAGES` subdirectory, which in turn houses the `messages.po` and 'messages.mo' files containing all the translatable strings.
 
-Replace `es` with the desired language code as needed.
-
 ### Adding New Languages
 
 Collaborators can easily add support for new languages by following these steps:
