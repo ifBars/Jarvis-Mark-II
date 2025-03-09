@@ -68,4 +68,4 @@ Contributions are welcome – please add your entries in the appropriate section
   - `commands.py` - Modified to support command modularization
   - `tasks.py` - Modified to support command modularization.
 
-*This release is based on Patchi's Mark 2 implementation and modularized by ifBars. Contributions and pull requests are welcome!*
+*This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*

@@ -1,12 +1,22 @@
 import os
 import configparser
 import google.generativeai as genai
+from localization import set_language
+from pathlib import Path
+
+def update_language(lang):
+    """Update the language setting in the config file."""
+    config.set("Settings", "language", lang)
+    with open(CONFIG_FILE, "w") as configfile:
+        config.write(configfile)
+    print(_("Language updated to {lang}. Restart the application to apply changes.").format(lang=lang))
 
 default_config = {
     'General': {
-        'base_dir': 'C:\Jarvis-Mark-II',
+        'language': 'en',
+        'base_dir': r'C:\Jarvis-Mark-II',
         'api_key': 'your-api-key',
-        'voice_key': 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM'
+        'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM'
     },
     'InputListener': {
         'talk_key': 't'
@@ -51,7 +61,8 @@ else:
     if changed:
         with open(config_file, 'w') as f:
             config.write(f)
-
+            
+LANGUAGE = config.get("General", "language", fallback="en")
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
@@ -65,3 +76,5 @@ SOUNDS_DIR = os.path.join(BASE_DIR, config['Sounds']['sounds_dir'])
 MUSIC_DIR = os.path.join(BASE_DIR, config['Music']['music_dir'])
 
 genai.configure(api_key=API_KEY)
+set_language(LANGUAGE)
+print(f"Loaded language: {LANGUAGE}")

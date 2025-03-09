@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Error capturing audio:"
+msgstr "Error capturing audio:"
+
+msgid "Could not request results; {0}"
+msgstr "Could not request results; {0}"
+
+msgid "Loaded command modules:"
+msgstr "Loaded command modules:"
+
+msgid "Language updated to {lang}. Restart the application to apply changes."
+msgstr "Language updated to {lang}. Restart the application to apply changes."
+
+msgid "Exiting the program"
+msgstr "Exiting the program"
+
+msgid "Warning: No translation file found for {lang}, defaulting to English."
+msgstr "Warning: No translation file found for {lang}, defaulting to English."
+
+msgid "Press and hold {key} to communicate with Jarvis using your default microphone"
+msgstr "Press and hold {key} to communicate with Jarvis using your default microphone"
+
+msgid "Listening..."
+msgstr "Listening..."
+
+msgid "You said:"
+msgstr "You said:"
+
+msgid "Program Terminated"
+msgstr "Program Terminated"
+
+msgid "Error reading MUSIC_DIR:"
+msgstr "Error reading MUSIC_DIR:"
+
+msgid "Playlist not found. Available playlists:"
+msgstr "Playlist not found. Available playlists:"
+
+msgid "Playlist '{folder}' not found. Available playlists: {playlists}"
+msgstr "Playlist '{folder}' not found. Available playlists: {playlists}"
+
+msgid "Recording Started!"
+msgstr "Recording Started!"
+
+msgid "Failed to start recording:"
+msgstr "Failed to start recording:"
+
+msgid "Recording Stopped!"
+msgstr "Recording Stopped!"
+
+msgid "Failed to stop recording:"
+msgstr "Failed to stop recording:"

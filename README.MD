@@ -8,6 +8,11 @@
   - [Installation Guides](#installation-guides)
     - [Mark 2.1 Installation](#mark-21-installation)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
+  - [Locales](#locales)
+    - [How It Works](#how-it-works)
+    - [Directory Structure](#directory-structure)
+    - [Compiling Translations](#compiling-translations)
+    - [Adding New Languages](#adding-new-languages)
   - [Common Installation Issues](#common-installation-issues)
   - [Changelog](#changelog)
 
@@ -58,6 +63,82 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 [View the Google Doc](https://docs.google.com/document/d/1STOtrWikkjOU_NCjUmY4COfTySb01chrkCE3kcUkTGU/edit?usp=sharing)
 
 *Created by cyburak*
+
+## Locales
+
+Jarvis is designed to offer a localized user experience by supporting multiple languages. The language is selected by modifying the `language` option in the `config.ini` file. The current supported locales are:
+
+- **en**: English (default)
+- **es**: Spanish
+- **pt**: Portuguese
+- **fr**: French
+
+### How It Works
+
+When Jarvis starts, it reads the `language` setting from `config.ini` and loads the corresponding language files from the `locales` directory. This ensures that all messages and prompts appear in the selected language.
+
+### Directory Structure
+
+The project uses a clear directory structure for managing locale files. Here’s an example of the structure:
+
+```
+Jarvis/
+└── locales/
+    ├── en/
+    │   └── LC_MESSAGES/
+    │       ├── messages.mo
+    │       └── messages.po
+    ├── es/
+    │   └── LC_MESSAGES/
+    │       ├── messages.mo
+    │       └── messages.po
+    ├── pt/
+    │   └── LC_MESSAGES/
+    │       ├── messages.mo
+    │       └── messages.po
+    ├── fr/
+    │   └── LC_MESSAGES/
+    │       ├── messages.mo
+    │       └── messages.po
+    └── system_instructions.json
+```
+
+Each language folder contains an `LC_MESSAGES` subdirectory, which in turn houses the `messages.po` and 'messages.mo' files containing all the translatable strings.
+
+### Compiling Translations
+
+The `.po` files need to be re-compiled into `.mo` files, whenever changes are made to them, so that they can be read by Jarvis at runtime. To compile the translations, use [gettext's](https://www.gnu.org/software/gettext/) `msgfmt` tool. For example, to compile the Spanish translations, run this in your Jarvis directory:
+
+```bash
+msgfmt locales/es/LC_MESSAGES/messages.po -o locales/es/LC_MESSAGES/messages.mo
+```
+
+Replace `es` with the desired language code as needed.
+
+### Adding New Languages
+
+Collaborators can easily add support for new languages by following these steps:
+
+1. **Create a New Folder:**  
+   Under the `locales` directory, create a new folder using the appropriate ISO language code (e.g., `de` for German).
+
+2. **Set Up the Directory Structure:**  
+   Inside your new language folder, create a subdirectory named `LC_MESSAGES`.
+
+3. **Add the Translation File:**  
+   Create a `messages.po` file within the `LC_MESSAGES` folder. Use the same keys and structure as the existing locale `messages.po` files to maintain consistency. (ex: msgid, msgstr)
+
+4. **Translate System Instructions:**
+   In addition to the messages, translate the `system_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context.
+
+5. **Compile the File:**  
+   Use `msgfmt` to compile the `.po` file into a `.mo` file:
+   ```bash
+   msgfmt locales/de/LC_MESSAGES/messages.po -o locales/de/LC_MESSAGES/messages.mo
+   ```
+
+6. **Update Configurations:**  
+   To test your new language, update the `language` setting in `config.ini` to your new language code (e.g., `de`) and run Jarvis.
 
 ## Common Installation Issues
 

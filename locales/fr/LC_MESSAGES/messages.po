@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+
+msgid "Error capturing audio:"
+msgstr "Erreur lors de la capture audio:"
+
+msgid "Could not request results; {0}"
+msgstr "Impossible de récupérer les résultats ; {0}"
+
+msgid "Loaded command modules:"
+msgstr "Modules de commande chargés :"
+
+msgid "Language updated to {lang}. Restart the application to apply changes."
+msgstr "Langue mise à jour en {lang}. Redémarrez l'application pour appliquer les modifications."
+
+msgid "Exiting the program"
+msgstr "Fermeture du programme"
+
+msgid "Warning: No translation file found for {lang}, defaulting to English."
+msgstr "Attention : aucun fichier de traduction trouvé pour {lang}, utilisation de l'anglais par défaut."
+
+msgid "Press and hold {key} to communicate with Jarvis using your default microphone"
+msgstr "Appuyez et maintenez {key} pour communiquer avec Jarvis via votre microphone par défaut"
+
+msgid "Listening..."
+msgstr "En écoute..."
+
+msgid "You said:"
+msgstr "Vous avez dit :"
+
+msgid "Program Terminated"
+msgstr "Programme terminé"
+
+msgid "Error reading MUSIC_DIR:"
+msgstr "Erreur lors de la lecture de MUSIC_DIR :"
+
+msgid "Playlist not found. Available playlists:"
+msgstr "Liste de lecture non trouvée. Listes de lecture disponibles :"
+
+msgid "Playlist '{folder}' not found. Available playlists: {playlists}"
+msgstr "La liste de lecture '{folder}' n'a pas été trouvée. Listes de lecture disponibles : {playlists}"
+
+msgid "Recording Started!"
+msgstr "Enregistrement démarré !"
+
+msgid "Failed to start recording:"
+msgstr "Échec du démarrage de l'enregistrement :"
+
+msgid "Recording Stopped!"
+msgstr "Enregistrement arrêté !"
+
+msgid "Failed to stop recording:"
+msgstr "Échec de l'arrêt de l'enregistrement :"

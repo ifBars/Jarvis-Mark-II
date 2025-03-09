@@ -6,6 +6,7 @@ import pygame
 from pydub import AudioSegment
 import json
 import config
+from localization import _
 
 engine = pyttsx3.init()
 pygame.mixer.init()
@@ -103,7 +104,7 @@ elif config.SPEECH_ENGINE == "speech_recognition":
                     chunk = recognizer.record(source, duration=0.25)
                     audio_chunks.append(chunk)
                 except Exception as e:
-                    print("Error capturing audio:", e)
+                    print(_("Error capturing audio:"), e)
         if audio_chunks:
             combined_raw = b"".join(chunk.get_raw_data() for chunk in audio_chunks)
             sample_rate = audio_chunks[0].sample_rate
@@ -115,7 +116,7 @@ elif config.SPEECH_ENGINE == "speech_recognition":
             except sr.UnknownValueError:
                 return ""
             except sr.RequestError as e:
-                print("Could not request results; {0}".format(e))
+                print(_("Could not request results; {0}").format(e))
                 return ""
         return None
 

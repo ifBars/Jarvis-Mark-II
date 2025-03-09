@@ -1,5 +1,6 @@
 from obswebsocket import obsws, requests
 import config
+from localization import _
 
 OBS_HOST = config.OBS_HOST
 OBS_PORT = config.OBS_PORT
@@ -33,9 +34,9 @@ def start_recording():
         ws.connect()
         ws.call(requests.StartRecording())
         ws.disconnect()
-        print("Recording Started!")
+        print(_("Recording Started!"))
     except Exception as e:
-        print("Failed to start recording:", e)
+        print(_("Failed to start recording:"), e)
 
 def stop_recording():
     try:
@@ -43,6 +44,6 @@ def stop_recording():
         ws.connect()
         ws.call(requests.StopRecording())
         ws.disconnect()
-        print("Recording Stopped!")
+        print(_("Recording Stopped!"))
     except Exception as e:
-        print("Failed to stop recording:", e)
+        print(_("Failed to stop recording:"), e)
