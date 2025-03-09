@@ -11,7 +11,6 @@
   - [Locales](#locales)
     - [How It Works](#how-it-works)
     - [Directory Structure](#directory-structure)
-    - [Compiling Translations](#compiling-translations)
     - [Adding New Languages](#adding-new-languages)
   - [Common Installation Issues](#common-installation-issues)
   - [Changelog](#changelog)
@@ -105,14 +104,6 @@ Jarvis/
 
 Each language folder contains an `LC_MESSAGES` subdirectory, which in turn houses the `messages.po` and 'messages.mo' files containing all the translatable strings.
 
-### Compiling Translations
-
-The `.po` files need to be re-compiled into `.mo` files, whenever changes are made to them, so that they can be read by Jarvis at runtime. To compile the translations, use [gettext's](https://www.gnu.org/software/gettext/) `msgfmt` tool. For example, to compile the Spanish translations, run this in your Jarvis directory:
-
-```bash
-msgfmt locales/es/LC_MESSAGES/messages.po -o locales/es/LC_MESSAGES/messages.mo
-```
-
 Replace `es` with the desired language code as needed.
 
 ### Adding New Languages
@@ -131,8 +122,11 @@ Collaborators can easily add support for new languages by following these steps:
 4. **Translate System Instructions:**
    In addition to the messages, translate the `system_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context.
 
+5. **Translate Setup & Start Scripts Messages**
+   Finally before compiling and testing, translate the `setup_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context.
+
 5. **Compile the File:**  
-   Use `msgfmt` to compile the `.po` file into a `.mo` file:
+   Use `msgfmt` to compile the `messages.po` file into a `messages.mo` file:
    ```bash
    msgfmt locales/de/LC_MESSAGES/messages.po -o locales/de/LC_MESSAGES/messages.mo
    ```
