@@ -126,6 +126,7 @@ Collaborators can easily add support for new languages by following these steps:
 
 5. **Compile the File:**  
    Use `msgfmt` to compile the `messages.po` file into a `messages.mo` file:
+   Replace `de` with the desired language code as needed.
    ```bash
    msgfmt locales/de/LC_MESSAGES/messages.po -o locales/de/LC_MESSAGES/messages.mo
    ```
