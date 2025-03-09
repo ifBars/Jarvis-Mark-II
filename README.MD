@@ -100,6 +100,7 @@ Jarvis/
     │       ├── messages.mo
     │       └── messages.po
     └── system_instructions.json
+    └── setup_instructions.json
 ```
 
 Each language folder contains an `LC_MESSAGES` subdirectory, which in turn houses the `messages.po` and 'messages.mo' files containing all the translatable strings.
