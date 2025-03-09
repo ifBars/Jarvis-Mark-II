@@ -4,6 +4,7 @@ import threading
 import time
 import random
 from config import MUSIC_DIR
+from localization import _
 
 pygame.mixer.init()
 
@@ -16,7 +17,7 @@ def get_playlists():
     try:
         return [d for d in os.listdir(MUSIC_DIR) if os.path.isdir(os.path.join(MUSIC_DIR, d))]
     except Exception as e:
-        print("Error reading MUSIC_DIR:", e)
+        print(_("Error reading MUSIC_DIR:"), e)
         return []
 
 # Dynamically list available playlists in the commands string.
@@ -53,11 +54,13 @@ def music_thread(folder):
                         return
                 current_song_index = (current_song_index + 1) % len(music_queue)
     else:
-        print("Playlist not found. Available playlists:", ", ".join(get_playlists()))
+        print(_("Playlist not found. Available playlists:") + " " + ", ".join(get_playlists()))
 
 def play_music(folder):
     if folder not in get_playlists():
-        print(f"Playlist '{folder}' not found. Available playlists: {', '.join(get_playlists())}")
+        print(_("Playlist '{folder}' not found. Available playlists: {playlists}").format(
+            folder=folder, playlists=", ".join(get_playlists())
+        ))
         return
     threading.Thread(target=music_thread, args=(folder,), daemon=True).start()
 

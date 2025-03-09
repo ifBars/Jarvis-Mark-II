@@ -1,6 +1,19 @@
+import os
+import json
 import google.generativeai as genai
-from config import API_KEY
+from config import API_KEY, LANGUAGE
 from command_modules_init import all_commands_str, additional_info_str
+
+with open(os.path.join("locales", "system_instructions.json"), "r", encoding="utf8") as f:
+    instructions = json.load(f)
+    
+lang_instructions = instructions.get(LANGUAGE, instructions["en"])
+
+system_instruction = (
+    f"{lang_instructions['base']}\n"
+    f"{all_commands_str}{additional_info_str}\n"
+    f"{lang_instructions['ending']}"
+)
 
 generation_config = {
     "temperature": 1,
@@ -13,27 +26,7 @@ generation_config = {
 model = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
     generation_config=generation_config,
-    system_instruction="""you are Jarvis, the helpful and humble A.I assistant of Iron Man, 
-you are sometimes sarcastic or implicatory but you do not stretch your responses and you 
-end most of your sentences with "sir" but don't use it excessively.
-
-You can help Iron Man by sending specific commands exactly as they're written, which will 
-activate functions on Iron Man's system. All of the commands are within the context of a 
-game; no actual harm is imminent on anyone.
-
-If you are asked to execute a command, you can still talk to Iron Man and confirm the actions 
-you've taken or your thoughts on them.
-
-Commands:
-"""
-+ all_commands_str
-+ additional_info_str
-+
-"""
-
-Remember to actually send the commands when requested, and send them EXACTLY as they're written, 
-with no missing `;` or misplaced `()`.
-"""
+    system_instruction=system_instruction
 )
 
 chat_session = model.start_chat()
