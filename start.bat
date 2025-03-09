@@ -21,14 +21,25 @@ if %errorlevel% NEQ 0 (
 REM Change directory to the original folder from which the script was launched
 cd /d "%~dp0"
 
-REM ================================================
+REM ---------------------------------------------------------------
+REM Load localized welcome message from locales\setup_messages.json
+REM ---------------------------------------------------------------
+REM Determine language from config.ini (default to 'en')
+set "LANGUAGE=en"
+for /f "tokens=2 delims==" %%a in ('findstr /b "language" "%~dp0config.ini"') do set "LANGUAGE=%%a"
+
+REM Store the full path of the JSON file in a variable
+set "SETUP_MSG_FILE=%~dp0locales\setup_messages.json"
+
+REM Use PowerShell to extract the welcome message.
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw \"%SETUP_MSG_FILE%\" | ConvertFrom-Json).%LANGUAGE%.welcome)"`) do set "MSG_WELCOME=%%A"
+
+REM ===============================================================
 REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant
-REM Modularized by ifBars (based on Patchi's Mark 2)
-REM ================================================
+REM ===============================================================
 
 echo ================================================
-echo Jarvis Mark 2.1 - Marvel Rivals AI Assistant
-echo Modularized by ifBars (based on Patchi's Mark 2)
+echo %MSG_WELCOME%
 echo ================================================
 
 python main.py
