@@ -122,14 +122,14 @@ Collaborators can easily add support for new languages by following these steps:
    In addition to the messages, translate the `system_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context.
 
 5. **Translate Setup & Start Scripts Messages**
-   Finally before compiling and testing, translate the `setup_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context.
+   Finally before compiling and testing, translate the `setup_instructions.json` file located in the `locales` directory. Ensure that the translations follow the original structure and context. Then open setup.bat, and add your language option to the language selection section.
 
 5. **Compile the File:**  
    Use `msgfmt` to compile the `messages.po` file into a `messages.mo` file:
-   Replace `de` with the desired language code as needed.
    ```bash
    msgfmt locales/de/LC_MESSAGES/messages.po -o locales/de/LC_MESSAGES/messages.mo
    ```
+   Replace `de` with the desired language code as needed.
 
 6. **Update Configurations:**  
    To test your new language, update the `language` setting in `config.ini` to your new language code (e.g., `de`) and run Jarvis.

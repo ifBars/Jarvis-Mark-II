@@ -67,5 +67,9 @@ Contributions are welcome – please add your entries in the appropriate section
   - `chat.py` - Modified to support command modularization and removed sound list
   - `commands.py` - Modified to support command modularization
   - `tasks.py` - Modified to support command modularization.
+  
+## [Mark 2.3] - March 9th, 2025 (ifBars)
+- **Localization & Bug fixes**
+  - Jarvis now has a localization system, that allows contributors to add translations for new languages. Refer to readme for how to contribute to localization.
 
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*
