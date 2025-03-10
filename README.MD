@@ -148,6 +148,9 @@ Collaborators can easily add support for new languages by following these steps:
 4. **Could not find a version that satisfies the requirement audioop-lts**
    - This means you are on python 3.12 or earlier, and do not need to install audioop-lts
 
+5. **Start/Stop Recording is not working**
+   - First ensure you have the latest version of Jarvis. Then check what version of OBS you have. If you have OBS 27.x or earlier, ensure `websocket_library` inside `config.ini` is set to `obswebsocket`. If you have OBS 28.x or later, ensure `websocket_library` inside `config.ini` is set to `obsws-python`.
+
 ## Changelog
 
 For a detailed list of changes and updates, please refer to the [CHANGELOG.md](CHANGELOG.md) file.

@@ -68,8 +68,10 @@ Iron Man could also ask you to blame his teammates depending on their roles for 
 # region Methods for Commands
 def fireshots(n):
         for _ in range(n):
-            press('o')
-            time.sleep(0.7)
+            pyautogui.mouseDown(button='left')
+            time.sleep(random.uniform(0.1, 0.2))
+            pyautogui.mouseUp(button='left')
+            time.sleep(0.1)
 
 def unibeam(n):
     pyautogui.mouseDown(button='right')
@@ -78,9 +80,9 @@ def unibeam(n):
 
 def freaky():
     for _ in range(50):
-        keyboard.press('u')
+        pyautogui.mouseDown(button='right')
         time.sleep(0.01)
-        keyboard.release('u')
+        pyautogui.mouseUp(button='right')
         time.sleep(0.05)
 
 def press(key):
@@ -104,12 +106,14 @@ def toggle_mute():
     volume.SetMute(muted, None)
 
 def set_volume(level):
-    volume.SetMasterVolumeLevelScalar(level / 100.0, None)
+    pygame.mixer.music.set_volume(level / 100.0)
 
 def change_volume(amount):
-    current = volume.GetMasterVolumeLevelScalar() * 100
-    new_level = max(0, min(100, current + amount))
-    volume.SetMasterVolumeLevelScalar(new_level / 100.0, None)
+    current = pygame.mixer.music.get_volume()
+    change = amount / 100.0
+    new_level = current + change
+    new_level = max(0.0, min(new_level, 1.0))
+    pygame.mixer.music.set_volume(new_level)
 
 def insta_lock():
     tx, ty = 1800, 650
