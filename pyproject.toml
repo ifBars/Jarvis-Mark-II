@@ -1,0 +1,18 @@
+[project]
+name = "rivalsjarvis"
+version = "2.3.0"
+description = "Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system, built for the game Marvel Rivals."
+authors = [
+  { name = "PatchiPup" },
+  { name = "ifBars" },
+  { name = "Supereiris" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+startjarvis = "jarvis.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

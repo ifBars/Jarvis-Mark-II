@@ -7,6 +7,7 @@ from config import INPUT_START_KEY
 from localization import _
 
 def main():
+    update_checked = check_for_update()
     print(_("Press and hold {key} to communicate with Jarvis using your default microphone").format(key=INPUT_START_KEY))
     try:
         while True:

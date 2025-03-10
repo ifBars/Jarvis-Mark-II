@@ -1,0 +1,98 @@
+name: Auto Release on Push
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository with full history
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important for tagging history
+
+      # 2. Set up Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # 3. Install dependencies: toml (for parsing pyproject.toml) and packaging (for version comparison)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install toml packaging
+
+      # 4. Extract current version from pyproject.toml
+      - name: Extract current version
+        id: extract_version
+        run: |
+          python - <<'EOF'
+          import toml, os
+          data = toml.load("pyproject.toml")
+          # Try to read from the [project] table first; fallback to [tool.poetry] if needed.
+          version_str = data.get("project", {}).get("version")
+          if version_str is None:
+              version_str = data.get("tool", {}).get("poetry", {}).get("version")
+          if version_str is None:
+              raise RuntimeError("Version not found in pyproject.toml")
+          # Write the version to GITHUB_OUTPUT for later steps.
+          print(f"new_version={version_str}", flush=True)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"new_version={version_str}\n")
+          EOF
+
+      # 5. Fetch the latest release tag from GitHub
+      - name: Get latest release tag
+        id: get_latest
+        run: |
+          tag=$(curl -s https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest | jq -r '.tag_name')
+          if [ "$tag" = "null" ] || [ -z "$tag" ]; then
+            echo "No release found; defaulting to 0.0.0"
+            tag="0.0.0"
+          fi
+          echo "latest_tag=${tag}" >> $GITHUB_OUTPUT
+
+      # 6. Compare versions (using packaging.version)
+      - name: Compare versions
+        id: compare
+        run: |
+          python - <<'EOF'
+          import os
+          from packaging import version
+          new_version = os.environ.get("NEW_VERSION") or "${{ steps.extract_version.outputs.new_version }}"
+          old_version = os.environ.get("LATEST_TAG") or "${{ steps.get_latest.outputs.latest_tag }}"
+          # Compare versions
+          should_release = version.parse(new_version) > version.parse(old_version)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"should_release={'true' if should_release else 'false'}\n")
+          print(f"New version: {new_version}, Latest tag: {old_version}")
+          print(f"Should release: {should_release}")
+          EOF
+
+      # 7. If a new version is detected, create a new Git tag and push it.
+      - name: Create Git tag
+        if: steps.compare.outputs.should_release == 'true'
+        run: |
+          new_version=${{ steps.extract_version.outputs.new_version }}
+          echo "Creating Git tag: $new_version"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$new_version"
+          git push origin "$new_version"
+
+      # 8. Publish a GitHub Release using the new tag
+      - name: Publish GitHub Release
+        if: steps.compare.outputs.should_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.extract_version.outputs.new_version }}
+          name: Release ${{ steps.extract_version.outputs.new_version }}
+          body: |
+            Automated release based on version in pyproject.toml.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
