@@ -53,3 +53,48 @@ msgstr "Recording Stopped!"
 
 msgid "Failed to stop recording:"
 msgstr "Failed to stop recording:"
+
+msgid "Error: Received status code {0} from {1}"
+msgstr "Error: Received status code {0} from {1}"
+
+msgid "Failed to get local commit: {0}"
+msgstr "Failed to get local commit: {0}"
+
+msgid "{0} [y/n]: "
+msgstr "{0} [y/n]: "
+
+msgid "Please respond with 'y' or 'n'."
+msgstr "Please respond with 'y' or 'n'."
+
+msgid "Updating Jarvis with command:"
+msgstr "Updating Jarvis with command:"
+
+msgid "Update failed: {0}"
+msgstr "Update failed: {0}"
+
+msgid "Could not determine commit information; skipping update check."
+msgstr "Could not determine commit information; skipping update check."
+
+msgid "Local commit: {0}"
+msgstr "Local commit: {0}"
+
+msgid "Remote commit: {0}"
+msgstr "Remote commit: {0}"
+
+msgid "Your Jarvis is up-to-date."
+msgstr "Your Jarvis is up-to-date."
+
+msgid "A new commit is available."
+msgstr "A new commit is available."
+
+msgid "Would you like to update?"
+msgstr "Would you like to update?"
+
+msgid "Update successful. Restarting..."
+msgstr "Update successful. Restarting..."
+
+msgid "Update failed."
+msgstr "Update failed."
+
+msgid "Update canceled by user."
+msgstr "Update canceled by user."

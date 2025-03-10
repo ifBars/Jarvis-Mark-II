@@ -53,3 +53,48 @@ msgstr "Grabación detenida!"
 
 msgid "Failed to stop recording:"
 msgstr "Error al detener la grabación:"
+
+msgid "Error: Received status code {0} from {1}"
+msgstr "Error: Código de estado {0} recibido de {1}"
+
+msgid "Failed to get local commit: {0}"
+msgstr "No se pudo obtener el commit local: {0}"
+
+msgid "{0} [y/n]: "
+msgstr "{0} [s/n]: "
+
+msgid "Please respond with 'y' or 'n'."
+msgstr "Por favor, responda con 's' o 'n'."
+
+msgid "Updating Jarvis with command:"
+msgstr "Actualizando el Jarvis con el comando:"
+
+msgid "Update failed: {0}"
+msgstr "La actualización falló: {0}"
+
+msgid "Could not determine commit information; skipping update check."
+msgstr "No se pudo determinar la información del commit; se omite la comprobación de actualización."
+
+msgid "Local commit: {0}"
+msgstr "Commit local: {0}"
+
+msgid "Remote commit: {0}"
+msgstr "Commit remoto: {0}"
+
+msgid "Your Jarvis is up-to-date."
+msgstr "Su Jarvis está actualizado."
+
+msgid "A new commit is available."
+msgstr "Hay un nuevo commit disponible."
+
+msgid "Would you like to update?"
+msgstr "¿Desea actualizar?"
+
+msgid "Update successful. Restarting..."
+msgstr "Actualización exitosa. Reiniciando..."
+
+msgid "Update failed."
+msgstr "La actualización falló."
+
+msgid "Update canceled by user."
+msgstr "Actualización cancelada por el usuario."

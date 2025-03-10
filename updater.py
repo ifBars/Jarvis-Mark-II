@@ -11,7 +11,7 @@ def get_remote_commit():
     url = "https://api.github.com/repos/ifBars/Jarvis-Mark-II/commits/main"
     response = requests.get(url)
     if response.status_code != 200:
-        print(f"Error: Received status code {response.status_code} from {url}")
+        print(_("Error: Received status code {0} from {1}").format(response.status_code, url))
         return None
     data = response.json()
     remote_sha = data.get("sha")
@@ -31,19 +31,19 @@ def get_local_commit():
         local_sha = result.stdout.strip()
         return local_sha
     except subprocess.CalledProcessError as e:
-        print("Failed to get local commit:", e)
+        print(_("Failed to get local commit: {0}").format(e))
         return None
 
 def prompt_user(prompt):
     """Prompt user and return True if user agrees."""
     while True:
-        choice = input(f"{prompt} [y/n]: ").lower().strip()
+        choice = input("{0} [y/n]: ".format(prompt)).lower().strip()
         if choice in ("y", "yes"):
             return True
         elif choice in ("n", "no"):
             return False
         else:
-            print("Please respond with 'y' or 'n'.")
+            print(_("Please respond with 'y' or 'n'."))
 
 def perform_update():
     """
@@ -52,12 +52,12 @@ def perform_update():
     """
     branch = "main"
     pull_cmd = ["git", "pull", "origin", branch]
-    print("Updating repository with command:")
+    print(_("Updating Jarvis with command:"))
     print(" ".join(pull_cmd))
     try:
         subprocess.check_call(pull_cmd)
     except subprocess.CalledProcessError as e:
-        print("Update failed:", e)
+        print(_("Update failed: {0}").format(e))
         return False
     return True
 
@@ -70,23 +70,23 @@ def check_for_update():
     local_commit = get_local_commit()
     remote_commit = get_remote_commit()
     if local_commit is None or remote_commit is None:
-        print("Could not determine commit information; skipping update check.")
+        print(_("Could not determine commit information; skipping update check."))
         return False
 
-    print(f"Local commit: {local_commit}")
-    print(f"Remote commit: {remote_commit}")
+    print(_("Local commit: {0}").format(local_commit))
+    print(_("Remote commit: {0}").format(remote_commit))
     
     if local_commit == remote_commit:
-        print("Your repository is up-to-date.")
+        print(_("Your Jarvis is up-to-date."))
         return False
     else:
-        print("A new commit is available.")
-        if prompt_user("Would you like to update?"):
+        print(_("A new commit is available."))
+        if prompt_user(_("Would you like to update?")):
             if perform_update():
-                print("Update successful. Restarting...")
+                print(_("Update successful. Restarting..."))
                 os.execv(sys.executable, [sys.executable] + sys.argv)
             else:
-                print("Update failed.")
+                print(_("Update failed."))
         else:
-            print("Update canceled by user.")
+            print(_("Update canceled by user."))
     return True

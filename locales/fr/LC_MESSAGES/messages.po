@@ -7,49 +7,94 @@ msgid "Error capturing audio:"
 msgstr "Erreur lors de la capture audio:"
 
 msgid "Could not request results; {0}"
-msgstr "Impossible de récupérer les résultats ; {0}"
+msgstr "Impossible de recuperer les resultats ; {0}"
 
 msgid "Loaded command modules:"
-msgstr "Modules de commande chargés :"
+msgstr "Modules de commande charges :"
 
 msgid "Language updated to {lang}. Restart the application to apply changes."
-msgstr "Langue mise à jour en {lang}. Redémarrez l'application pour appliquer les modifications."
+msgstr "Langue mise a jour en {lang}. Redemarrez l'application pour appliquer les modifications."
 
 msgid "Exiting the program"
 msgstr "Fermeture du programme"
 
 msgid "Warning: No translation file found for {lang}, defaulting to English."
-msgstr "Attention : aucun fichier de traduction trouvé pour {lang}, utilisation de l'anglais par défaut."
+msgstr "Attention : aucun fichier de traduction trouve pour {lang}, utilisation de l'anglais par defaut."
 
 msgid "Press and hold {key} to communicate with Jarvis using your default microphone"
-msgstr "Appuyez et maintenez {key} pour communiquer avec Jarvis via votre microphone par défaut"
+msgstr "Appuyez et maintenez {key} pour communiquer avec Jarvis via votre microphone par defaut"
 
 msgid "Listening..."
-msgstr "En écoute..."
+msgstr "En ecoute..."
 
 msgid "You said:"
 msgstr "Vous avez dit :"
 
 msgid "Program Terminated"
-msgstr "Programme terminé"
+msgstr "Programme termine"
 
 msgid "Error reading MUSIC_DIR:"
 msgstr "Erreur lors de la lecture de MUSIC_DIR :"
 
 msgid "Playlist not found. Available playlists:"
-msgstr "Liste de lecture non trouvée. Listes de lecture disponibles :"
+msgstr "Liste de lecture non trouvee. Listes de lecture disponibles :"
 
 msgid "Playlist '{folder}' not found. Available playlists: {playlists}"
-msgstr "La liste de lecture '{folder}' n'a pas été trouvée. Listes de lecture disponibles : {playlists}"
+msgstr "La liste de lecture '{folder}' n'a pas ete trouvee. Listes de lecture disponibles : {playlists}"
 
 msgid "Recording Started!"
-msgstr "Enregistrement démarré !"
+msgstr "Enregistrement demarre !"
 
 msgid "Failed to start recording:"
-msgstr "Échec du démarrage de l'enregistrement :"
+msgstr "echec du demarrage de l'enregistrement :"
 
 msgid "Recording Stopped!"
-msgstr "Enregistrement arrêté !"
+msgstr "Enregistrement arrete !"
 
 msgid "Failed to stop recording:"
-msgstr "Échec de l'arrêt de l'enregistrement :"
+msgstr "echec de l'arret de l'enregistrement :"
+
+msgid "Error: Received status code {0} from {1}"
+msgstr "Erreur : Code d'etat {0} reçu depuis {1}"
+
+msgid "Failed to get local commit: {0}"
+msgstr "echec de recuperation du commit local : {0}"
+
+msgid "{0} [y/n]: "
+msgstr "{0} [o/n]: "
+
+msgid "Please respond with 'y' or 'n'."
+msgstr "Veuillez repondre par 'o' ou 'n'."
+
+msgid "Updating Jarvis with command:"
+msgstr "Mise a jour du depot avec la commande :"
+
+msgid "Update failed: {0}"
+msgstr "Mise a jour echouee : {0}"
+
+msgid "Could not determine commit information; skipping update check."
+msgstr "Impossible de determiner les informations de commit ; verification de mise a jour ignoree."
+
+msgid "Local commit: {0}"
+msgstr "Commit local : {0}"
+
+msgid "Remote commit: {0}"
+msgstr "Commit distant : {0}"
+
+msgid "Your Jarvis is up-to-date."
+msgstr "Votre depot est a jour."
+
+msgid "A new commit is available."
+msgstr "Un nouveau commit est disponible."
+
+msgid "Would you like to update?"
+msgstr "Voulez-vous mettre a jour ?"
+
+msgid "Update successful. Restarting..."
+msgstr "Mise a jour reussie. Redemarrage..."
+
+msgid "Update failed."
+msgstr "La mise a jour a echoue."
+
+msgid "Update canceled by user."
+msgstr "Mise a jour annulee par l'utilisateur."
