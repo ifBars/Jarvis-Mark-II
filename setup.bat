@@ -174,6 +174,12 @@ if not exist "%ORIGINAL_PATH%\.git" (
         pause
         exit /b 1
     )
+
+    git remote get-url upstream >nul 2>&1
+    if %errorlevel%==1 (
+        git remote add upstream https://github.com/PatchiPup/Jarvis-Mark-II.git
+        git fetch upstream
+    )
     
     REM Fetch the repository history from the remote
     git fetch origin
