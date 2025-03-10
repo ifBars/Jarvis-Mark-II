@@ -2,34 +2,52 @@ import os
 import sys
 import subprocess
 import requests
+import configparser
 
-try:
-    # Use built-in tomllib if available (Python 3.11+)
-    import tomllib
-except ImportError:
-    # Otherwise, fall back to the third-party 'toml' package
-    import toml as tomllib
-
-def load_current_version(pyproject_path="pyproject.toml"):
-    """Load version from pyproject.toml from [project] (or [tool.poetry] as fallback)."""
-    with open(pyproject_path, "rb") as f:
-        data = tomllib.load(f)
-    version = data.get("project", {}).get("version")
-    if version is None:
-        version = data.get("tool", {}).get("poetry", {}).get("version")
+def load_current_version(version_ini_path="version.ini"):
+    """
+    Load the current version from a version.ini file.
+    The file should have a [version] section with a key 'current'.
+    """
+    config = configparser.ConfigParser()
+    config.read(version_ini_path)
+    try:
+        version = config["version"]["current"]
+    except KeyError:
+        raise RuntimeError("version.ini is missing the [version] section or 'current' key.")
     return version
 
 CURRENT_VERSION = load_current_version()
 
-def get_latest_version():
+def get_remote_commit():
     """
-    Contact your update server (e.g. GitHub API or a custom endpoint)
-    and return the latest version string.
-    For demonstration, this function returns a hardcoded version.
+    Contact the GitHub API to get the latest commit SHA on the 'main' branch.
     """
-    response = requests.get("https://api.github.com/repos/ifBars/Jarvis-Mark-II/releases/latest")
-    latest = response.json()["tag_name"]
-    return latest
+    url = "https://api.github.com/repos/ifBars/Jarvis-Mark-II/commits/main"
+    response = requests.get(url)
+    if response.status_code != 200:
+        print(f"Error: Received status code {response.status_code} from {url}")
+        return None
+    data = response.json()
+    remote_sha = data.get("sha")
+    return remote_sha
+
+def get_local_commit():
+    """
+    Get the current commit SHA from the local repository using git rev-parse.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        local_sha = result.stdout.strip()
+        return local_sha
+    except subprocess.CalledProcessError as e:
+        print("Failed to get local commit:", e)
+        return None
 
 def prompt_user(prompt):
     """Prompt user and return True if user agrees."""
@@ -44,21 +62,15 @@ def prompt_user(prompt):
 
 def perform_update():
     """
-    Run pip install to upgrade the package.
-    Assumes your package is hosted on GitHub.
+    Perform a git pull to update the repository.
+    Assumes this script is executed in the repository's root directory.
     """
-    package_name = "rivalsjarvis"
-    repo_url = "https://github.com/ifBars/Jarvis-Mark-II.git"
     branch = "main"
-
-    update_cmd = [
-        sys.executable, "-m", "pip", "install", "-U",
-        f"git+{repo_url}@{branch}#egg={package_name}"
-    ]
-    print("Updating package with command:")
-    print(" ".join(update_cmd))
+    pull_cmd = ["git", "pull", "origin", branch]
+    print("Updating repository with command:")
+    print(" ".join(pull_cmd))
     try:
-        subprocess.check_call(update_cmd)
+        subprocess.check_call(pull_cmd)
     except subprocess.CalledProcessError as e:
         print("Update failed:", e)
         return False
@@ -66,18 +78,25 @@ def perform_update():
 
 def check_for_update():
     """
-    Check if a new version is available.
-    If yes, prompt the user, perform update if confirmed,
-    and restart the application.
+    Check if the remote commit differs from the local commit.
+    If yes, prompt the user and perform a git pull update if confirmed,
+    then restart the application.
     """
-    print(f"Current version: {CURRENT_VERSION}")
-    latest_version = get_latest_version()
-    print(f"Latest version from github: {latest_version}")
-    if latest_version == CURRENT_VERSION:
-        print("You are already running the latest version.")
+    print(f"Current version (from version.ini): {CURRENT_VERSION}")
+    local_commit = get_local_commit()
+    remote_commit = get_remote_commit()
+    if local_commit is None or remote_commit is None:
+        print("Could not determine commit information; skipping update check.")
+        return False
+
+    print(f"Local commit: {local_commit}")
+    print(f"Remote commit: {remote_commit}")
+    
+    if local_commit == remote_commit:
+        print("Your repository is up-to-date.")
         return False
     else:
-        print(f"A new version is available: {latest_version} (current: {CURRENT_VERSION})")
+        print("A new commit is available.")
         if prompt_user("Would you like to update?"):
             if perform_update():
                 print("Update successful. Restarting...")
