@@ -1,6 +1,6 @@
 {
     "en": {
-        "welcome": "Jarvis Mark 2.1 - Marvel Rivals AI Assistant",
+        "welcome": "Jarvis - Marvel Rivals AI Assistant",
         "language_loading": "Loading selected language...",
         "python_installed": "Python is installed.",
         "python_not_installed": "Python is not installed.",
@@ -42,7 +42,7 @@
         "git_already_installed": "Git is already installed."
     },
     "es": {
-        "welcome": "Jarvis Mark 2.1 - Asistente de inteligencia artificial de Marvel Rivals",
+        "welcome": "Jarvis - Asistente de inteligencia artificial de Marvel Rivals",
         "language_loading": "Cargando el idioma seleccionado...",
         "python_installed": "Python esta instalado.",
         "python_not_installed": "Python no esta instalado.",
@@ -84,7 +84,7 @@
         "git_already_installed": "Git ya esta instalado."
     },
     "pt": {
-        "welcome": "Jarvis Mark 2.1 - Assistente de IA Marvel Rivals",
+        "welcome": "Jarvis - Assistente de IA Marvel Rivals",
         "language_loading": "A carregar idioma selecionado...",
         "python_installed": "Python esta instalado.",
         "python_not_installed": "Python nao esta instalado.",
@@ -126,7 +126,7 @@
         "git_already_installed": "Git ja esta instalado."
     },
     "fr": {
-        "welcome": "Jarvis Mark 2.1 - Assistant IA de Marvel Rivals",
+        "welcome": "Jarvis - Assistant IA de Marvel Rivals",
         "language_loading": "Chargement de la langue selectionnee...",
         "python_installed": "Python est installe.",
         "python_not_installed": "Python n'est pas installe.",
