@@ -6,6 +6,7 @@ pynput
 numpy
 pyautogui
 obs-websocket-py
+obsws-python
 pycaw
 pygame
 pydub

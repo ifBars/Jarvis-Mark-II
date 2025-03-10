@@ -63,6 +63,17 @@ def perform_update():
         return False
     return True
 
+def install_dependencies():
+    install_cmd = ["pip", "install", "-r", "requirements.txt"]
+    print(_("Updating Jarvis with command:"))
+    print(" ".join(install_cmd))
+    try:
+        subprocess.check_call(install_cmd)
+    except subprocess.CalledProcessError as e:
+        print(_("Update failed: {0}").format(e))
+        return False
+    return True
+
 def check_for_update():
     """
     Check if the remote commit differs from the local commit.
@@ -85,8 +96,9 @@ def check_for_update():
         print(_("A new commit is available."))
         if prompt_user(_("Would you like to update?")):
             if perform_update():
-                print(_("Update successful. Restarting..."))
-                sys.exit(1)
+                if install_dependencies():
+                    print(_("Update successful. Restarting..."))
+                    sys.exit(1)
             else:
                 print(_("Update failed."))
         else:
