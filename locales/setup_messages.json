@@ -35,7 +35,11 @@
         "config_updated": "config.ini updated successfully.",
         "config_not_found": "config.ini not found.",
         "update_config_reminder": "Please open the config.ini file in this folder and update the following: - Google API Key: api_key - OBS: host, port, password - Any other configuration values as required.",
-        "setup_complete": "Setup is complete!\nYou can now run the start.bat to start Jarvis."
+        "setup_complete": "Setup is complete! You can now run the start.bat to start Jarvis.",
+        "git_not_installed": "Git is not installed.",
+        "git_installing": "Downloading and installing Git silently...",
+        "git_installed": "Git has been successfully installed.",
+        "git_already_installed": "Git is already installed."
     },
     "es": {
         "welcome": "Jarvis Mark 2.1 - Asistente de inteligencia artificial de Marvel Rivals",
@@ -73,7 +77,11 @@
         "config_updated": "config.ini actualizado con exito.",
         "config_not_found": "config.ini no encontrado.",
         "update_config_reminder": "Por favor, abre el archivo config.ini en esta carpeta y actualiza lo siguiente: - Google API Key: api_key - OBS: host, port, password - Cualquier otro valor de configuracion segun se requiera.",
-        "setup_complete": "La configuracion se ha completado!\nAhora puedes ejecutar start.bat para iniciar Jarvis."
+        "setup_complete": "La configuracion se ha completado! Ahora puedes ejecutar start.bat para iniciar Jarvis.",
+        "git_not_installed": "Git no esta instalado.",
+        "git_installing": "Descargando e instalando Git en modo silencioso...",
+        "git_installed": "Git se ha instalado correctamente.",
+        "git_already_installed": "Git ya esta instalado."
     },
     "pt": {
         "welcome": "Jarvis Mark 2.1 - Assistente de IA Marvel Rivals",
@@ -111,7 +119,11 @@
         "config_updated": "config.ini atualizado com sucesso.",
         "config_not_found": "config.ini not found.",
         "update_config_reminder": "Por favor, abra o arquivo config.ini nesta pasta e atualize o seguinte: - Google API Key: api_key - OBS: host, port, password - Quaisquer outros valores de configuracao necessarios.",
-        "setup_complete": "Setup is complete!\nAgora voce pode executar o start.bat para iniciar o Jarvis."
+        "setup_complete": "Setup is complete! Agora voce pode executar o start.bat para iniciar o Jarvis.",
+        "git_not_installed": "Git nao esta instalado.",
+        "git_installing": "Baixando e instalando Git silenciosamente...",
+        "git_installed": "Git foi instalado com sucesso.",
+        "git_already_installed": "Git ja esta instalado."
     },
     "fr": {
         "welcome": "Jarvis Mark 2.1 - Assistant IA de Marvel Rivals",
@@ -149,6 +161,10 @@
         "config_updated": "config.ini mis a jour avec succes.",
         "config_not_found": "config.ini not found.",
         "update_config_reminder": "Veuillez ouvrir le fichier config.ini dans ce dossier et mettre a jour ce qui suit : - Google API Key: api_key - OBS: host, port, password - Toute autre valeur de configuration necessaire.",
-        "setup_complete": "Setup is complete!\nVous pouvez maintenant executer le start.bat pour lancer Jarvis."
+        "setup_complete": "Setup is complete! Vous pouvez maintenant executer le start.bat pour lancer Jarvis.",
+        "git_not_installed": "Git n'est pas installe.",
+        "git_installing": "Telechargement et installation silencieuse de Git...",
+        "git_installed": "Git a ete installe avec succes.",
+        "git_already_installed": "Git est deja installe."
     }
 }
