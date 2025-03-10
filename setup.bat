@@ -106,6 +106,11 @@ for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_installing)"`) do set "MSG_GIT_INSTALLING=%%A"
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_installed)"`) do set "MSG_GIT_INSTALLED=%%A"
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_already_installed)"`) do set "MSG_GIT_ALREADY_INSTALLED=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.initializing_git)"`) do set "MSG_INITIALIZING_GIT=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error1)"`) do set "MSG_GIT_ERROR1=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error2)"`) do set "MSG_GIT_ERROR2=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error3)"`) do set "MSG_GIT_ERROR3=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error4)"`) do set "MSG_GIT_ERROR4=%%A"
 
 REM ================================================
 REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant Setup Script
@@ -148,6 +153,43 @@ if errorlevel 1 (
     echo %MSG_GIT_INSTALLED%
 ) else (
     echo %MSG_GIT_ALREADY_INSTALLED%
+)
+
+REM Check if the current folder is a Git repository
+if not exist "%ORIGINAL_PATH%\.git" (
+    echo %MSG_INITIALIZING_GIT%
+    
+    REM Initialize a new Git repository
+    git init
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR1%
+        pause
+        exit /b 1
+    )
+    
+    REM Add the remote origin (adjust the URL as needed)
+    git remote add origin https://github.com/ifBars/Jarvis-Mark-II.git
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR2%
+        pause
+        exit /b 1
+    )
+    
+    REM Fetch the repository history from the remote
+    git fetch origin
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR3%
+        pause
+        exit /b 1
+    )
+    
+    REM Reset the local repository to the latest state from 'main'
+    git reset --hard origin/main
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR4%
+        pause
+        exit /b 1
+    )
 )
 
 REM Check for George TTS voice on machine

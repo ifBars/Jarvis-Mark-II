@@ -39,7 +39,12 @@
         "git_not_installed": "Git is not installed.",
         "git_installing": "Downloading and installing Git silently...",
         "git_installed": "Git has been successfully installed.",
-        "git_already_installed": "Git is already installed."
+        "git_already_installed": "Git is already installed.",
+        "initializing_git": "Converting the folder into a Git repository for auto-update support...",
+        "git_error1": "Error: Failed to initialize Git repository.",
+        "git_error2": "Error: Failed to add remote origin.",
+        "git_error3": "Error: Failed to fetch remote repository.",
+        "git_error4": "Error: Failed to reset to the remote branch."
     },
     "es": {
         "welcome": "Jarvis - Asistente de inteligencia artificial de Marvel Rivals",
@@ -81,7 +86,12 @@
         "git_not_installed": "Git no esta instalado.",
         "git_installing": "Descargando e instalando Git en modo silencioso...",
         "git_installed": "Git se ha instalado correctamente.",
-        "git_already_installed": "Git ya esta instalado."
+        "git_already_installed": "Git ya esta instalado.",
+        "initializing_git": "Convirtiendo la carpeta en un repositorio Git para soporte de auto-actualizacion...",
+        "git_error1": "Error: No se pudo inicializar el repositorio Git.",
+        "git_error2": "Error: No se pudo agregar el origen remoto.",
+        "git_error3": "Error: No se pudo obtener el repositorio remoto.",
+        "git_error4": "Error: No se pudo resetear a la rama remota."
     },
     "pt": {
         "welcome": "Jarvis - Assistente de IA Marvel Rivals",
@@ -123,7 +133,12 @@
         "git_not_installed": "Git nao esta instalado.",
         "git_installing": "Baixando e instalando Git silenciosamente...",
         "git_installed": "Git foi instalado com sucesso.",
-        "git_already_installed": "Git ja esta instalado."
+        "git_already_installed": "Git ja esta instalado.",
+        "initializing_git": "Convertendo a pasta em um repositorio Git para suporte a autoatualizacao...",
+        "git_error1": "Erro: Falha ao inicializar o repositorio Git.",
+        "git_error2": "Erro: Falha ao adicionar a origem remota.",
+        "git_error3": "Erro: Falha ao buscar o repositorio remoto.",
+        "git_error4": "Erro: Falha ao resetar para o branch remoto."
     },
     "fr": {
         "welcome": "Jarvis - Assistant IA de Marvel Rivals",
@@ -165,6 +180,11 @@
         "git_not_installed": "Git n'est pas installe.",
         "git_installing": "Telechargement et installation silencieuse de Git...",
         "git_installed": "Git a ete installe avec succes.",
-        "git_already_installed": "Git est deja installe."
+        "git_already_installed": "Git est deja installe.",
+        "initializing_git": "Conversion du dossier en un depot Git pour la prise en charge de la mise a jour automatique...",
+        "git_error1": "Erreur : Echec de l'initialisation du depot Git.",
+        "git_error2": "Erreur : Echec de l'ajout de l'origine distante.",
+        "git_error3": "Erreur : Echec de la recuperation du depot distant.",
+        "git_error4": "Erreur : Echec de la reinitialisation sur la branche distante."
     }
 }
