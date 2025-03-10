@@ -74,5 +74,6 @@ Contributions are welcome – please add your entries in the appropriate section
   
 - **Auto-Updater**
   - Jarvis now has an updater system, that checks for any updates and asks you if you want to install them upon running Jarvis, automatically installing the updates if you say yes.
+  - The updater system works like so, setup.bat installs git for the user and initializes the repo if it is not already. Then updater.py compares the local and latest commit, pulling the latest commit if necesarry.
 
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*
