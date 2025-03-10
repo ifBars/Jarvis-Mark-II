@@ -10,7 +10,7 @@ def get_remote_commit():
     """
     Contact the GitHub API to get the latest commit SHA on the 'main' branch.
     """
-    url = "https://api.github.com/repos/ifBars/Jarvis-Mark-II/commits/main"
+    url = "https://api.github.com/repos/PatchiPup/Jarvis-Mark-II/commits/main"
     response = requests.get(url)
     if response.status_code != 200:
         print(_("Error: Received status code {0} from {1}").format(response.status_code, url))
@@ -87,7 +87,6 @@ def check_for_update():
             if perform_update():
                 print(_("Update successful. Restarting..."))
                 sys.exit(1)
-                # os.execv(python_exe, [python_exe] + sys.argv)
             else:
                 print(_("Update failed."))
         else:
