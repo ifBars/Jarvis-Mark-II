@@ -56,7 +56,7 @@ if "%langChoice%"=="1" (
 
 REM Update (or create) config.ini with the chosen language
 if exist "%~dp0config.ini" (
-    powershell -Command "(Get-Content '%~dp0config.ini') -replace '^language\s*=.*$', 'language=%LANGUAGE%' | Set-Content '%~dp0config.ini'"
+    powershell -Command "(Get-Content '%~dp0config.ini') -replace '^language\s*=.*$', 'language = %LANGUAGE%' | Set-Content '%~dp0config.ini'"
 ) else (
     echo language=%LANGUAGE% > "%~dp0config.ini"
 )
@@ -118,7 +118,7 @@ python --version >nul 2>&1
 if errorlevel 1 (
     echo %MSG_PYTHON_NOT_INSTALLED%
     echo %MSG_DOWNLOADING_PYTHON%
-    powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe' -OutFile '%ORIGINAL_PATH%\python_installer.exe'"
+    powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.9/python-3.12.9-amd64.exe' -OutFile '%ORIGINAL_PATH%\python_installer.exe'"
     
     echo %MSG_INSTALLING_PYTHON%
     start "" /wait "%ORIGINAL_PATH%\python_installer.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1
@@ -241,7 +241,7 @@ goto Dependencies
 echo.
 REM Install Python dependencies
 echo %MSG_INSTALLING_DEPENDENCIES%
-start /wait "Installing pip dependencies" cmd /c "pip install --upgrade pip && pip install --upgrade setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
+start /wait "Installing pip dependencies" cmd /c "python -m pip install --upgrade pip && pip install --upgrade setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
 if errorlevel 1 (
     echo ERROR: Failed to install dependencies.
     pause
