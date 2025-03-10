@@ -12,7 +12,6 @@ requires-python = ">=3.9"
 
 [[tool.poetry.packages]]
 include = "."
-exclude = ["pyproject.toml", "README.md", ".github/*", ".git/*"]
 
 [project.scripts]
 startjarvis = "jarvis.main:main"
