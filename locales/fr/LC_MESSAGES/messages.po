@@ -98,3 +98,6 @@ msgstr "La mise a jour a echoue."
 
 msgid "Update canceled by user."
 msgstr "Mise a jour annulee par l'utilisateur."
+
+msgid "Python could not be found to restart Jarvis, please manually re-open Jarvis."
+msgstr "Python n'a pas pu etre trouve pour redemarrer Jarvis, veuillez rouvrir Jarvis manuellement."
