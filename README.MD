@@ -6,7 +6,8 @@
   - [Overview](#overview)
   - [Features](#features)
   - [Installation Guides](#installation-guides)
-    - [Mark 2.1 Installation](#mark-21-installation)
+    - [Mark 2.1 Installation Video Guide](#mark-21-installation-video-guide)
+    - [Mark 2.1 Installation Text Guide](#mark-21-installation-text-guide)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
   - [Locales](#locales)
     - [How It Works](#how-it-works)
@@ -32,7 +33,11 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 
 ## Installation Guides
 
-### Mark 2.1 Installation
+### Mark 2.1 Installation Video Guide
+
+[https://www.youtube.com/watch?v=AaZ1x0DO-ZE](https://www.youtube.com/watch?v=AaZ1x0DO-ZE)
+
+### Mark 2.1 Installation Text Guide
 
 1. **Download the Repository:**
    - **With Git:**  
