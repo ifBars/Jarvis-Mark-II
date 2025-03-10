@@ -4,21 +4,6 @@ import subprocess
 import requests
 import configparser
 
-def load_current_version(version_ini_path="version.ini"):
-    """
-    Load the current version from a version.ini file.
-    The file should have a [version] section with a key 'current'.
-    """
-    config = configparser.ConfigParser()
-    config.read(version_ini_path)
-    try:
-        version = config["version"]["current"]
-    except KeyError:
-        raise RuntimeError("version.ini is missing the [version] section or 'current' key.")
-    return version
-
-CURRENT_VERSION = load_current_version()
-
 def get_remote_commit():
     """
     Contact the GitHub API to get the latest commit SHA on the 'main' branch.
@@ -82,7 +67,6 @@ def check_for_update():
     If yes, prompt the user and perform a git pull update if confirmed,
     then restart the application.
     """
-    print(f"Current version (from version.ini): {CURRENT_VERSION}")
     local_commit = get_local_commit()
     remote_commit = get_remote_commit()
     if local_commit is None or remote_commit is None:
