@@ -113,7 +113,7 @@ for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error4)"`) do set "MSG_GIT_ERROR4=%%A"
 
 REM ================================================
-REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant Setup Script
+REM Jarvis - Marvel Rivals AI Assistant Setup Script
 REM Modularized by ifBars (based on Patchi's Mark 2)
 REM ================================================
 cls
