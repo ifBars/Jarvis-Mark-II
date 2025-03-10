@@ -5,6 +5,7 @@ from exit import should_exit
 from commands import process_command
 from config import INPUT_START_KEY
 from localization import _
+from updater import check_for_update
 
 def main():
     update_checked = check_for_update()

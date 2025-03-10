@@ -27,7 +27,7 @@ def get_latest_version():
     and return the latest version string.
     For demonstration, this function returns a hardcoded version.
     """
-    response = requests.get("https://api.github.com/repos/PatchiPup/Jarvis-Mark-II/releases/latest")
+    response = requests.get("https://api.github.com/repos/ifBars/Jarvis-Mark-II/releases/latest")
     latest = response.json()["tag_name"]
     return latest
 
@@ -48,8 +48,8 @@ def perform_update():
     Assumes your package is hosted on GitHub.
     """
     package_name = "rivalsjarvis"
-    repo_url = "https://github.com/PatchiPup/Jarvis-Mark-II.git"
-    branch = "master"
+    repo_url = "https://github.com/ifBars/Jarvis-Mark-II.git"
+    branch = "main"
 
     update_cmd = [
         sys.executable, "-m", "pip", "install", "-U",
