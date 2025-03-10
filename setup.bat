@@ -168,7 +168,7 @@ if not exist "%ORIGINAL_PATH%\.git" (
     )
     
     REM Add the remote origin (adjust the URL as needed)
-    git remote add origin https://github.com/ifBars/Jarvis-Mark-II.git
+    git remote add origin https://github.com/PatchiPup/Jarvis-Mark-II.git
     if errorlevel 1 (
         echo %MSG_GIT_ERROR2%
         pause
@@ -189,6 +189,12 @@ if not exist "%ORIGINAL_PATH%\.git" (
         echo %MSG_GIT_ERROR4%
         pause
         exit /b 1
+    )
+) else (
+    git remote get-url upstream >nul 2>&1
+    if %errorlevel%==1 (
+        git remote add upstream https://github.com/PatchiPup/Jarvis-Mark-II.git
+        git fetch upstream
     )
 )
 
