@@ -153,4 +153,4 @@ Collaborators can easily add support for new languages by following these steps:
 
 ## Changelog
 
-For a detailed list of changes and updates, please refer to the [CHANGELOG.md](CHANGELOG.md) file.
+For a detailed list of changes and updates, please refer to the [CHANGELOG.MD](CHANGELOG.MD) file.
