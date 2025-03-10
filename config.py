@@ -25,7 +25,9 @@ default_config = {
         'model_path': 'vosk-model-small-en-us-0.15'
     },
     'Speech': {
-        'engine': 'speech_recognition'
+        'engine': 'speech_recognition',
+        'vb_cable': 'false',
+        'vb_cable_device': 'Voicemeeter Input'
     },
     'OBS': {
         'host': 'localhost',
@@ -62,13 +64,15 @@ else:
         with open(config_file, 'w') as f:
             config.write(f)
             
-LANGUAGE = config.get("General", "language", fallback="en")
+LANGUAGE = config.get('General', 'language', fallback='en')
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
 INPUT_START_KEY = config['InputListener']['talk_key']
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 SPEECH_ENGINE = config['Speech']['engine'].lower()
+VB_CABLE = config.getboolean('Speech', 'vb_cable', fallback=False)
+VB_CABLE_DEVICE = config.get('Speech', 'vb_cable_device', fallback='Voicemeeter Input')
 OBS_HOST = config['OBS']['host']
 OBS_PORT = int(config['OBS']['port'])
 OBS_PASSWORD = config['OBS']['password']

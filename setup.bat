@@ -56,7 +56,7 @@ if "%langChoice%"=="1" (
 
 REM Update (or create) config.ini with the chosen language
 if exist "%~dp0config.ini" (
-    powershell -Command "(Get-Content '%~dp0config.ini') -replace '^language\s*=.*$', 'language=%LANGUAGE%' | Set-Content '%~dp0config.ini'"
+    powershell -Command "(Get-Content '%~dp0config.ini') -replace '^language\s*=.*$', 'language = %LANGUAGE%' | Set-Content '%~dp0config.ini'"
 ) else (
     echo language=%LANGUAGE% > "%~dp0config.ini"
 )
@@ -102,9 +102,18 @@ for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.config_not_found)"`) do set "MSG_CONFIG_NOT_FOUND=%%A"
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.update_config_reminder)"`) do set "MSG_UPDATE_CONFIG_REMINDER=%%A"
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.setup_complete)"`) do set "MSG_SETUP_COMPLETE=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_not_installed)"`) do set "MSG_GIT_NOT_INSTALLED=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_installing)"`) do set "MSG_GIT_INSTALLING=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_installed)"`) do set "MSG_GIT_INSTALLED=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_already_installed)"`) do set "MSG_GIT_ALREADY_INSTALLED=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.initializing_git)"`) do set "MSG_INITIALIZING_GIT=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error1)"`) do set "MSG_GIT_ERROR1=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error2)"`) do set "MSG_GIT_ERROR2=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error3)"`) do set "MSG_GIT_ERROR3=%%A"
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw '%SETUP_MSG_FILE%' | ConvertFrom-Json).%LANGUAGE%.git_error4)"`) do set "MSG_GIT_ERROR4=%%A"
 
 REM ================================================
-REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant Setup Script
+REM Jarvis - Marvel Rivals AI Assistant Setup Script
 REM Modularized by ifBars (based on Patchi's Mark 2)
 REM ================================================
 cls
@@ -118,7 +127,7 @@ python --version >nul 2>&1
 if errorlevel 1 (
     echo %MSG_PYTHON_NOT_INSTALLED%
     echo %MSG_DOWNLOADING_PYTHON%
-    powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe' -OutFile '%ORIGINAL_PATH%\python_installer.exe'"
+    powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.9/python-3.12.9-amd64.exe' -OutFile '%ORIGINAL_PATH%\python_installer.exe'"
     
     echo %MSG_INSTALLING_PYTHON%
     start "" /wait "%ORIGINAL_PATH%\python_installer.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1
@@ -132,6 +141,56 @@ if errorlevel 1 (
     echo %MSG_PYTHON_INSTALLED%
 )
 echo.
+
+REM Check if Git is installed
+git --version >nul 2>&1
+if errorlevel 1 (
+    echo %MSG_GIT_NOT_INSTALLED%
+    echo %MSG_GIT_INSTALLING%
+    
+    powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.1/Git-2.42.0-64-bit.exe' -OutFile '%ORIGINAL_PATH%\git_installer.exe'"
+    start /wait "" "%ORIGINAL_PATH%\git_installer.exe" /VERYSILENT /NORESTART
+    echo %MSG_GIT_INSTALLED%
+) else (
+    echo %MSG_GIT_ALREADY_INSTALLED%
+)
+
+REM Check if the current folder is a Git repository
+if not exist "%ORIGINAL_PATH%\.git" (
+    echo %MSG_INITIALIZING_GIT%
+    
+    REM Initialize a new Git repository
+    git init
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR1%
+        pause
+        exit /b 1
+    )
+    
+    REM Add the remote origin (adjust the URL as needed)
+    git remote add origin https://github.com/ifBars/Jarvis-Mark-II.git
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR2%
+        pause
+        exit /b 1
+    )
+    
+    REM Fetch the repository history from the remote
+    git fetch origin
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR3%
+        pause
+        exit /b 1
+    )
+    
+    REM Reset the local repository to the latest state from 'main'
+    git reset --hard origin/main
+    if errorlevel 1 (
+        echo %MSG_GIT_ERROR4%
+        pause
+        exit /b 1
+    )
+)
 
 REM Check for George TTS voice on machine
 echo %MSG_CHECKING_TTS%
@@ -241,7 +300,7 @@ goto Dependencies
 echo.
 REM Install Python dependencies
 echo %MSG_INSTALLING_DEPENDENCIES%
-start /wait "Installing pip dependencies" cmd /c "pip install --upgrade pip && pip install --upgrade setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
+start /wait "Installing pip dependencies" cmd /c "python -m pip install --upgrade pip && pip install --upgrade setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
 if errorlevel 1 (
     echo ERROR: Failed to install dependencies.
     pause

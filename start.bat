@@ -18,6 +18,7 @@ if %errorlevel% NEQ 0 (
     exit /b
 )
 
+:LOOP
 REM Change directory to the original folder from which the script was launched
 cd /d "%~dp0"
 
@@ -35,12 +36,13 @@ REM Use PowerShell to extract the welcome message.
 for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "((Get-Content -Raw \"%SETUP_MSG_FILE%\" | ConvertFrom-Json).%LANGUAGE%.welcome)"`) do set "MSG_WELCOME=%%A"
 
 REM ===============================================================
-REM Jarvis Mark 2.1 - Marvel Rivals AI Assistant
+REM Jarvis - Marvel Rivals AI Assistant
 REM ===============================================================
-
 echo ================================================
 echo %MSG_WELCOME%
 echo ================================================
 
 python main.py
 pause
+cls
+goto :LOOP

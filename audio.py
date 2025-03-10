@@ -3,6 +3,8 @@ import threading
 import time
 import pyttsx3
 import pygame
+import wave
+import pyaudio
 from pydub import AudioSegment
 import json
 import config
@@ -23,8 +25,24 @@ if matching_voice is None:
 engine.setProperty('voice', matching_voice)
 speech_channel = pygame.mixer.Channel(1)
 
+vb_cable_index = None
+if config.VB_CABLE:
+    import speech_recognition as sr
+    for i, device in enumerate(sr.Microphone.list_microphone_names()):
+        if config.VB_CABLE_DEVICE.lower() in device.lower():
+            vb_cable_index = i
+            break
+    if vb_cable_index is None:
+        print("Error: VB-CABLE Input not found! Disabling VB-Cable output.")
+        config.VB_CABLE = False
+
 def speak(text, rate=170, pitch_factor=0.98):
-    """Convert text to speech and play asynchronously."""
+    """Convert text to speech and play asynchronously.
+    
+    If config.VB_CABLE is True and the VB-Cable device is found,
+    output the audio via VB-Cable using PyAudio.
+    Otherwise, play using pygame's mixer.
+    """
     def _speak():
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
         temp_filename = temp_file.name
@@ -40,10 +58,29 @@ def speak(text, rate=170, pitch_factor=0.98):
         pitched_sound = pitched_sound.set_frame_rate(44100)
         pitched_sound.export(temp_filename, format="wav")
 
-        playback = pygame.mixer.Sound(temp_filename)
-        speech_channel.play(playback)
-        while speech_channel.get_busy():
-            time.sleep(0.1)
+        if config.VB_CABLE and vb_cable_index is not None:
+            with wave.open(temp_filename, 'rb') as wf:
+                audio = pyaudio.PyAudio()
+                stream = audio.open(
+                    format=audio.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True,
+                    output_device_index=vb_cable_index
+                )
+                data = wf.readframes(1024)
+                while data:
+                    stream.write(data)
+                    data = wf.readframes(1024)
+                stream.stop_stream()
+                stream.close()
+                audio.terminate()
+        else:
+            playback = pygame.mixer.Sound(temp_filename)
+            speech_channel.play(playback)
+            while speech_channel.get_busy():
+                time.sleep(0.1)
+
     threading.Thread(target=_speak, daemon=True).start()
 
 if config.SPEECH_ENGINE == "vosk":
