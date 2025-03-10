@@ -86,12 +86,7 @@ def check_for_update():
         if prompt_user(_("Would you like to update?")):
             if perform_update():
                 print(_("Update successful. Restarting..."))
-                python_exe = shutil.which("python") or shutil.which("python3")
-                if not os.path.exists(python_exe):
-                    python_exe = sys.executable
-                    if python_exe is None:
-                        print("Python could not be found to restart Jarvis, please manually re-open Jarvis.")
-                        sys.exit(1)
+                sys.exit(1)
                 # os.execv(python_exe, [python_exe] + sys.argv)
             else:
                 print(_("Update failed."))
