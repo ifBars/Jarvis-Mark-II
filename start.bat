@@ -19,7 +19,6 @@ if %errorlevel% NEQ 0 (
 )
 
 :LOOP
-cls
 REM Change directory to the original folder from which the script was launched
 cd /d "%~dp0"
 
@@ -45,4 +44,5 @@ echo ================================================
 
 python main.py
 pause
+cls
 goto :LOOP
