@@ -3,6 +3,7 @@ import sys
 import subprocess
 import requests
 import configparser
+from localization import _
 
 def get_remote_commit():
     """
@@ -73,8 +74,8 @@ def check_for_update():
         print(_("Could not determine commit information; skipping update check."))
         return False
 
-    print(_("Local commit: {0}").format(local_commit))
-    print(_("Remote commit: {0}").format(remote_commit))
+    # print(_("Local commit: {0}").format(local_commit))
+    # print(_("Remote commit: {0}").format(remote_commit))
     
     if local_commit == remote_commit:
         print(_("Your Jarvis is up-to-date."))
@@ -90,3 +91,5 @@ def check_for_update():
         else:
             print(_("Update canceled by user."))
     return True
+
+check_for_update()

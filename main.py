@@ -1,14 +1,13 @@
 from input_listener import is_t_pressed
+from updater import check_for_update
 from audio import process_audio, speak, close_audio
 from chat import send_to_jarvis
 from exit import should_exit
 from commands import process_command
 from config import INPUT_START_KEY
 from localization import _
-from updater import check_for_update
 
 def main():
-    update_checked = check_for_update()
     print(_("Press and hold {key} to communicate with Jarvis using your default microphone").format(key=INPUT_START_KEY))
     try:
         while True:
