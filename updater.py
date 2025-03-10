@@ -3,6 +3,7 @@ import sys
 import subprocess
 import requests
 import configparser
+import shutil
 from localization import _
 
 def get_remote_commit():
