@@ -92,7 +92,7 @@ def check_for_update():
                     if python_exe is None:
                         print("Python could not be found to restart Jarvis, please manually re-open Jarvis.")
                         sys.exit(1)
-                os.execv(python_exe, [python_exe] + sys.argv)
+                # os.execv(python_exe, [python_exe] + sys.argv)
             else:
                 print(_("Update failed."))
         else:
