@@ -4,7 +4,6 @@ import os
 LOCALE_DIR = os.path.join(os.path.dirname(__file__), "locales")
 
 def set_language(lang):
-    """Change the language dynamically"""
     global _
     try:
         translation = gettext.translation("messages", localedir=LOCALE_DIR, languages=[lang])

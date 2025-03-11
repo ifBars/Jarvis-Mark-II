@@ -53,3 +53,51 @@ msgstr "Gravação Parada!"
 
 msgid "Failed to stop recording:"
 msgstr "Falha ao parar a gravação:"
+
+msgid "Error: Received status code {0} from {1}"
+msgstr "Erro: Código de status {0} recebido de {1}"
+
+msgid "Failed to get local commit: {0}"
+msgstr "Falha ao obter o commit local: {0}"
+
+msgid "{0} [y/n]: "
+msgstr "{0} [s/n]: "
+
+msgid "Please respond with 'y' or 'n'."
+msgstr "Por favor, responda com 's' ou 'n'."
+
+msgid "Updating Jarvis with command:"
+msgstr "Atualizando Jarvis com o comando:"
+
+msgid "Update failed: {0}"
+msgstr "Atualizacao falhou: {0}"
+
+msgid "Could not determine commit information; skipping update check."
+msgstr "Nao foi possivel determinar as informacoes do commit; ignorando a verificacao de atualizacao."
+
+msgid "Local commit: {0}"
+msgstr "Commit local: {0}"
+
+msgid "Remote commit: {0}"
+msgstr "Commit remoto: {0}"
+
+msgid "Your Jarvis is up-to-date."
+msgstr "Seu Jarvis esta atualizado."
+
+msgid "A new commit is available."
+msgstr "Um novo commit esta disponível."
+
+msgid "Would you like to update?"
+msgstr "Voce gostaria de atualizar?"
+
+msgid "Update successful. Restarting..."
+msgstr "Atualizacao bem-sucedida. Reiniciando..."
+
+msgid "Update failed."
+msgstr "Atualizacao falhou."
+
+msgid "Update canceled by user."
+msgstr "Atualizacao cancelada pelo usuario."
+
+msgid "Python could not be found to restart Jarvis, please manually re-open Jarvis."
+msgstr "Nao foi possivel encontrar o Python para reiniciar o Jarvis."

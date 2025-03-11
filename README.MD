@@ -6,7 +6,8 @@
   - [Overview](#overview)
   - [Features](#features)
   - [Installation Guides](#installation-guides)
-    - [Mark 2.1 Installation](#mark-21-installation)
+    - [Mark 2.1 Installation Video Guide](#mark-21-installation-video-guide)
+    - [Mark 2.1 Installation Text Guide](#mark-21-installation-text-guide)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
   - [Locales](#locales)
     - [How It Works](#how-it-works)
@@ -32,7 +33,11 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 
 ## Installation Guides
 
-### Mark 2.1 Installation
+### Mark 2.1 Installation Video Guide
+
+[https://www.youtube.com/watch?v=AaZ1x0DO-ZE](https://www.youtube.com/watch?v=AaZ1x0DO-ZE)
+
+### Mark 2.1 Installation Text Guide
 
 1. **Download the Repository:**
    - **With Git:**  
@@ -148,6 +153,9 @@ Collaborators can easily add support for new languages by following these steps:
 4. **Could not find a version that satisfies the requirement audioop-lts**
    - This means you are on python 3.12 or earlier, and do not need to install audioop-lts
 
+5. **Start/Stop Recording is not working**
+   - First ensure you have the latest version of Jarvis. Then check what version of OBS you have. If you have OBS 27.x or earlier, ensure `websocket_library` inside `config.ini` is set to `obswebsocket`. If you have OBS 28.x or later, ensure `websocket_library` inside `config.ini` is set to `obsws-python`.
+
 ## Changelog
 
-For a detailed list of changes and updates, please refer to the [CHANGELOG.md](CHANGELOG.md) file.
+For a detailed list of changes and updates, please refer to the [CHANGELOG.MD](CHANGELOG.MD) file.

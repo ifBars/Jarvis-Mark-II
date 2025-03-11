@@ -1,4 +1,5 @@
 from input_listener import is_t_pressed
+from updater import check_for_update
 from audio import process_audio, speak, close_audio, stop_speech
 from chat import send_to_jarvis
 from exit import should_exit
