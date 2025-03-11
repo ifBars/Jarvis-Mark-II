@@ -16,7 +16,8 @@ default_config = {
         'language': 'en',
         'base_dir': r'C:\Jarvis-Mark-II',
         'api_key': 'your-api-key',
-        'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM'
+        'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
+        'interrupt_jarvis': 'true'
     },
     'InputListener': {
         'talk_key': 't'
@@ -67,6 +68,7 @@ BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
 INPUT_START_KEY = config['InputListener']['talk_key']
+INTERRUPT_JARVIS = config['InputListener']['interrupt_jarvis'] == 'true'
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 SPEECH_ENGINE = config['Speech']['engine'].lower()
 OBS_HOST = config['OBS']['host']
