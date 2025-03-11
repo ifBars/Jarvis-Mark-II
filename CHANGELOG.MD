@@ -72,4 +72,24 @@ Contributions are welcome – please add your entries in the appropriate section
 - **Localization & Bug fixes**
   - Jarvis now has a localization system, that allows contributors to add translations for new languages. Refer to readme for how to contribute to localization.
 
+## [Mark 2.4] - March 9th, 2025 (ifBars)
+- **Spotify Module**
+  - Jarvis can now connect to your spotify and play songs and playlists for you.
+  
+  - Features:
+    - Play a song, playlist or artist's top songs
+    - Play a playlist the user has created
+    - Option to shuffle playlists
+    - Add a song to the queue
+    - Shuffle queue
+    - Pause/Resume/Skip player
+    - Let Jarvis choose and play a song
+  
+  - Requirements:
+    - To use the commands, open spotify BEFORE launching Jarvis.
+    - Some of the features like skip require a premium spotify subscription.     
+  
+  **Interrupt Jarvis**
+  Jarvis stops talking when you press the key to talk. Can be toggled off in config.ini
+
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*
