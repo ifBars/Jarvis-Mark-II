@@ -101,3 +101,12 @@ msgstr "Actualización cancelada por el usuario."
 
 msgid "Python could not be found to restart Jarvis, please manually re-open Jarvis."
 msgstr "No se pudo encontrar Python para reiniciar Jarvis, vuelva a abrir Jarvis manualmente."
+
+msgid "Personality updated to {personality}. Restarting the application."
+msgstr "Personalidad actualizada a {personality}. Reiniciando la aplicación."
+
+msgid "Loading personality: {personality_name}"
+msgstr "Cargando personalidad: {personality_name}"
+
+msgid "Warning: Personality '{personality_name}' not found. Falling back to 'jarvis'."
+msgstr "Advertencia: Personalidad '{personality_name}' no encontrada. Volviendo a 'jarvis'."

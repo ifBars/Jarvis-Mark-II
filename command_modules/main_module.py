@@ -9,7 +9,7 @@ from pynput.keyboard import Key, Controller as KeyController
 from pynput.mouse import Controller as MouseController, Button
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
-from config import SOUNDS_DIR
+from config import SOUNDS_DIR, LANGUAGE, update_personality
 from exit import exit_program
 
 engine = pyttsx3.init()
@@ -22,6 +22,14 @@ volume = interface.QueryInterface(IAudioEndpointVolume)
 pygame.mixer.init()
 muted = False
 
+def get_personality_names():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(script_dir)
+    personalities_dir = os.path.join(parent_dir, "personalities")
+    return [os.path.splitext(filename)[0] for filename in os.listdir(personalities_dir) if filename.endswith(".json")]
+
+available_personalities = ", ".join(get_personality_names())
+
 command_handlers = {
         "prs": lambda content: (press, (content)),
         "msg": lambda content: (chat, (content.strip()[:-4].strip(' ",'), content.lower().endswith("true"))),
@@ -30,6 +38,7 @@ command_handlers = {
         "vls": lambda content: (set_volume, (int(content))),
         "fre": lambda content: (fireshots, (int(content))),
         "uni": lambda content: (unibeam, (float(content))),
+        "per": lambda content: (load_personality, (content)),
         "frk": lambda _: (freaky, ()),
         "lck": lambda _: (insta_lock, ()),
         "mut": lambda _: (toggle_mute, ()),
@@ -38,7 +47,7 @@ command_handlers = {
         "ext": lambda _: (exit_program, ()),
     }
 
-commands_string = """
+commands_string = f"""
   prs(q)      - Nuke, destroy, or use maximum pulse  
   prs(e)      - Power up  
   prs(shift)  - Start or stop flying  
@@ -46,6 +55,7 @@ commands_string = """
   prs(r)      - Reload  
   fre(n)      - Fire a specific number of shots  
   uni(n)      - Fire the unibeam for a specific number of seconds  
+  per(personality) - Load a new personality. Available personalities: {available_personalities}
   msg(txt true) - Send a message in team chat  
   msg(txt false) - Send a message in match chat  
   frk()        - Activate freaky mode  
@@ -172,5 +182,9 @@ def chat(message, target):
         time.sleep(0.2)
         typerandom(message)
         pyautogui.press("enter")
+
+def load_personality(personality):
+    update_personality(personality)
+    exit_program()
 
 # endregion
