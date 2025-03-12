@@ -1,7 +1,7 @@
 import os
 import json
 import google.generativeai as genai
-from config import API_KEY, LANGUAGE, PERSONALITY
+from config import API_KEY, LANGUAGE, PERSONALITY, GEMINI_MODEL
 from command_modules_init import all_commands_str, additional_info_str
 from personality import load_personality
     
@@ -22,7 +22,7 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name=GEMINI_MODEL,
     generation_config=generation_config,
     system_instruction=system_instruction
 )

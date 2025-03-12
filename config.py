@@ -23,9 +23,12 @@ default_config = {
     'General': {
         'language': 'en',
         'base_dir': r'C:\Jarvis-Mark-II',
-        'api_key': 'your-api-key',
+        'api_key': 'your_api_key',
         'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
         'personality': 'jarvis'
+    },
+    'Gemini': {
+        'model': 'gemini-2.0-flash'
     },
     'InputListener': {
         'talk_key': 't'
@@ -79,6 +82,7 @@ BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
 PERSONALITY = config.get('General', 'personality', fallback='jarvis')
+GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
 INPUT_START_KEY = config['InputListener']['talk_key']
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 SPEECH_ENGINE = config['Speech']['engine'].lower()
