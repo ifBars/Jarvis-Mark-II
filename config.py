@@ -1,4 +1,5 @@
 import os
+import sys
 import configparser
 import google.generativeai as genai
 from localization import set_language
@@ -10,14 +11,25 @@ def update_language(lang):
     with open(CONFIG_FILE, "w") as configfile:
         config.write(configfile)
     print(_("Language updated to {lang}. Restart the application to apply changes.").format(lang=lang))
+    
+def update_personality(new_personality):
+    """Update the personality setting in the config file."""
+    config.set("General", "personality", new_personality)
+    with open(config_file, "w") as configfile:
+        config.write(configfile)
+    print(_("Personality updated to {personality}. Restarting the application.").format(personality=new_personality))
 
 default_config = {
     'General': {
         'language': 'en',
         'base_dir': r'C:\Jarvis-Mark-II',
-        'api_key': 'your-api-key',
+        'api_key': 'your_api_key',
         'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
+        'personality': 'jarvis',
         'interrupt_jarvis': 'true'
+    },
+    'Gemini': {
+        'model': 'gemini-2.0-flash'
     },
     'InputListener': {
         'talk_key': 't'
@@ -70,6 +82,8 @@ LANGUAGE = config.get('General', 'language', fallback='en')
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
+PERSONALITY = config.get('General', 'personality', fallback='jarvis')
+GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
 INPUT_START_KEY = config['InputListener']['talk_key']
 INTERRUPT_JARVIS = config['InputListener']['interrupt_jarvis'] == 'true'
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
