@@ -68,6 +68,43 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 *Created by cyburak*
 
+## Spotify Module Set Up
+
+To be able to use the Spotify module of Jarvis you need to create a Spotify Developer App and obtain the Client ID. This guide will walk you through the entire process. (Super Simple!)
+
+- **Step 1**: Create a Spotify Developer Account
+
+   Before you can create an app, you need a Spotify Developer account.
+
+   1. Go to the Spotify Developer Dashboard (https://developer.spotify.com/dashboard).
+   2. Click Log in and sign in with your Spotify account.
+   3. If prompted, accept the terms and conditions.
+
+- **Step 2**: Create a New Spotify App
+
+   1. Once logged in, click "Create an App".
+   2. Enter the App Name and App Description (e.g., "Jarvis").
+   3. Set the Redirect URI to **http://127.0.0.1:8888/callback**
+   4. Toggle 'Web API' option
+   5. Agree to the Spotify API terms and click Create.
+
+- **Step 3**: Get Your Client ID and Secret
+   
+   After creating the app:
+
+   1. Open the app in the Spotify Developer Dashboard.
+   2. Click 'Settings' on top right
+   3. Copy the Client ID
+
+- **Step 4**: Insert your Client ID to config.ini
+
+   Open config.ini and under 'Spotify' enter your Client ID in the field 'client_id'
+
+**You Are Done!**
+
+The spotify module should now be working. Beware that some features like 'skip song' require a premium spotify membership to work.
+
+
 ## Locales
 
 Jarvis is designed to offer a localized user experience by supporting multiple languages. The language is selected by modifying the `language` option in the `config.ini` file. The current supported locales are:
