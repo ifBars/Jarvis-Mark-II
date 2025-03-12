@@ -1,18 +1,16 @@
 import os
 import json
 import google.generativeai as genai
-from config import API_KEY, LANGUAGE
+from config import API_KEY, LANGUAGE, PERSONALITY
 from command_modules_init import all_commands_str, additional_info_str
-
-with open(os.path.join("locales", "system_instructions.json"), "r", encoding="utf8") as f:
-    instructions = json.load(f)
+from personality import load_personality
     
-lang_instructions = instructions.get(LANGUAGE, instructions["en"])
+personality_instructions = load_personality(PERSONALITY, LANGUAGE)
 
 system_instruction = (
-    f"{lang_instructions['base']}\n"
+    f"{personality_instructions['base']}\n"
     f"{all_commands_str}{additional_info_str}\n"
-    f"{lang_instructions['ending']}"
+    f"{personality_instructions['ending']}"
 )
 
 generation_config = {
