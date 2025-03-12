@@ -76,7 +76,7 @@ Contributions are welcome – please add your entries in the appropriate section
   - Jarvis now has an updater system, that checks for any updates and asks you if you want to install them upon running Jarvis, automatically installing the updates if you say yes.
   - The updater system works like so, setup.bat installs git for the user and initializes the repo if it is not already. Then updater.py compares the local and latest commit, pulling the latest commit if necesarry.
 
-## [Mark 2.4] - March 9th, 2025 (ifBars)
+## [Mark 2.4] - March 11th, 2025 (Supereiris)
 - **Spotify Module**
   - Jarvis can now connect to your spotify and play songs and playlists for you.
   
@@ -95,5 +95,13 @@ Contributions are welcome – please add your entries in the appropriate section
   
   **Interrupt Jarvis**
   Jarvis stops talking when you press the key to talk. Can be toggled off in config.ini
+
+## [Mark 2.4.1] - March 10th, 2025 (Supereiris)
+- **Toggleable Modules**
+  - Modules can now be enabled/disabled in config.ini.
+  - To disable a module just comment out the line by placing a ';' in the start.
+
+- **Updated README.MD**
+  - Added a tutorial on how to set up the Spotify Module
 
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*

@@ -1,7 +1,8 @@
 import pkgutil
 import importlib
 import command_modules
-from localization import _
+# from localization import _
+from config import ENABLED_MODULES
 
 all_commands = {}
 all_commands_str = ""
@@ -10,6 +11,9 @@ additional_info_str = ""
 # Iterate over all modules in the handlers package
 print(_("Loaded command modules:"))
 for _, module_name, _ in pkgutil.iter_modules(command_modules.__path__, command_modules.__name__ + "."):
+
+    if (module_name.split('.')[-1] not in ENABLED_MODULES): continue
+
     module = importlib.import_module(module_name)
     print(module_name)
     # Merge the command_handlers from each module

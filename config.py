@@ -8,7 +8,7 @@ from pathlib import Path
 def update_language(lang):
     """Update the language setting in the config file."""
     config.set("Settings", "language", lang)
-    with open(CONFIG_FILE, "w") as configfile:
+    with open(config_file, "w") as configfile:
         config.write(configfile)
     print(_("Language updated to {lang}. Restart the application to apply changes.").format(lang=lang))
     
@@ -85,6 +85,7 @@ LANGUAGE = config.get('General', 'language', fallback='en')
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
+ENABLED_MODULES = config['General']['enabled_modules'].splitlines()
 PERSONALITY = config.get('General', 'personality', fallback='jarvis')
 GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
 SPOTIFY_CLIENT_ID = config['Spotify']['client_id']
