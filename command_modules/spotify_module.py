@@ -1,11 +1,12 @@
 import random
 import spotipy
 from spotipy.oauth2 import SpotifyPKCE
+from config import SPOTIFY_CLIENT_ID
 
 # Authenticate using PKCE
 sp = spotipy.Spotify(auth_manager=SpotifyPKCE(
-    client_id="816bdceb410e4bb5b16ef27d7ae4b362", 
-    redirect_uri="http://localhost:8888/callback",
+    client_id=SPOTIFY_CLIENT_ID, 
+    redirect_uri="http://127.0.0.1:8888/callback",
     scope="user-modify-playback-state,user-read-playback-state,user-top-read",
     cache_path=".spotify_cache.json"  # Store token locally
 ))

@@ -48,6 +48,9 @@ default_config = {
         'password': 'password',
         'websocket_library': 'obsws-python'
     },
+    'Spotify': {
+        'client_id': '816bdceb410e4bb5b16ef27d7ae4b362'
+    },
     'Sounds': {
         'sounds_dir': 'sounds'
     },
@@ -84,8 +87,9 @@ API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
 PERSONALITY = config.get('General', 'personality', fallback='jarvis')
 GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
+SPOTIFY_CLIENT_ID = config['Spotify']['client_id']
 INPUT_START_KEY = config['InputListener']['talk_key']
-INTERRUPT_JARVIS = config['InputListener']['interrupt_jarvis'] == 'true'
+INTERRUPT_JARVIS = config['General']['interrupt_jarvis']
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 SPEECH_ENGINE = config['Speech']['engine'].lower()
 VB_CABLE = config.getboolean('Speech', 'vb_cable', fallback=False)
