@@ -26,7 +26,8 @@ default_config = {
         'api_key': 'your_api_key',
         'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
         'personality': 'jarvis',
-        'interrupt_jarvis': 'true'
+        'interrupt_jarvis': 'true',
+        'enabled_modules': 'main_module\nmusic_module\nobs_module\nspotify_module'
     },
     'Gemini': {
         'model': 'gemini-2.0-flash'
@@ -49,7 +50,7 @@ default_config = {
         'websocket_library': 'obsws-python'
     },
     'Spotify': {
-        'client_id': '816bdceb410e4bb5b16ef27d7ae4b362'
+        'client_id': 'your_spotify_app_client_id'
     },
     'Sounds': {
         'sounds_dir': 'sounds'
