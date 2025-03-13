@@ -43,3 +43,6 @@ venv.bak/
 
 # vosk model stuff
 vosk-model-small-en-us-0.15/
+
+# jarvis todo list
+TODO

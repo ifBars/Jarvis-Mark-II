@@ -9,6 +9,7 @@
     - [Mark 2.1 Installation Video Guide](#mark-21-installation-video-guide)
     - [Mark 2.1 Installation Text Guide](#mark-21-installation-text-guide)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
+  - [Spotify Module Set Up](#spotify-module-set-up)
   - [Locales](#locales)
     - [How It Works](#how-it-works)
     - [Directory Structure](#directory-structure)
@@ -88,7 +89,7 @@ To be able to use the Spotify module of Jarvis you need to create a Spotify Deve
    4. Toggle 'Web API' option
    5. Agree to the Spotify API terms and click Create.
 
-- **Step 3**: Get Your Client ID and Secret
+- **Step 3**: Get Your Client ID
    
    After creating the app:
 
@@ -107,12 +108,14 @@ The spotify module should now be working. Beware that some features like 'skip s
 
 ## Locales
 
-Jarvis is designed to offer a localized user experience by supporting multiple languages. The language is selected by modifying the `language` option in the `config.ini` file. The current supported locales are:
+Jarvis is designed to offer a localized user experience by supporting multiple languages for most things. The language is selected by modifying the `language` option in the `config.ini` file. The current supported locales are:
 
 - **en**: English (default)
 - **es**: Spanish
 - **pt**: Portuguese
 - **fr**: French
+
+These locales need to be updated upon every single update, and I nor other contributors cannot guarantee that these will be updated regularly. PRs for translations are always welcomed, and if you would like Jarvis to be translated into your langauge, or better support for an existing translation, please open an issue on the Github.
 
 ### How It Works
 
@@ -192,6 +195,12 @@ Collaborators can easily add support for new languages by following these steps:
 
 5. **Start/Stop Recording is not working**
    - First ensure you have the latest version of Jarvis. Then check what version of OBS you have. If you have OBS 27.x or earlier, ensure `websocket_library` inside `config.ini` is set to `obswebsocket`. If you have OBS 28.x or later, ensure `websocket_library` inside `config.ini` is set to `obsws-python`.
+
+6. **INVALID_CLIENT: Invalid redirect URI**
+   - If you are getting this error when setting up the spotify module, usually this is caused by attempted to connect your spotify account to the wrong spotify app. Ensure your client_id in config.ini matches your client_id from the spotify developer page of your created spotify app.
+
+7. **Couldn't find ffpmeg or avconv**
+   - This means you do not have ffpmeg installed, however Jarvis should still function just fine. So as long as your Jarvis is still working correctly, you can safely ignore this error. Otherwise ask for help in the discord.
 
 ## Changelog
 

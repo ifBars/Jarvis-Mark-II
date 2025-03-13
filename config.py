@@ -5,6 +5,27 @@ import google.generativeai as genai
 from localization import set_language
 from pathlib import Path
 
+def load_config(config, config_file, default_config):
+    """Reads the configuration from `config_file`, adds any missing sections
+    or options from `default_config`, and writes changes back if needed."""
+    config.read(config_file)
+    changed = False
+
+    for section, options in default_config.items():
+        if not config.has_section(section):
+            config.add_section(section)
+            changed = True
+        for key, value in options.items():
+            if not config.has_option(section, key):
+                config.set(section, key, value)
+                changed = True
+
+    if changed:
+        with open(config_file, 'w') as f:
+            config.write(f)
+
+    return config
+
 def update_language(lang):
     """Update the language setting in the config file."""
     config.set("Settings", "language", lang)
@@ -18,6 +39,15 @@ def update_personality(new_personality):
     with open(config_file, "w") as configfile:
         config.write(configfile)
     print(_("Personality updated to {personality}. Restarting the application.").format(personality=new_personality))
+
+def update_obs():
+    global config
+    config = load_config(config, config_file, default_config)
+    OBS_HOST = config['OBS']['host']
+    OBS_PORT = int(config['OBS']['port'])
+    OBS_PASSWORD = config['OBS']['password']
+    WEBSOCKET_LIBRARY = config['OBS']['websocket_library']
+    return OBS_HOST, OBS_PORT, OBS_PASSWORD, WEBSOCKET_LIBRARY
 
 default_config = {
     'General': {
@@ -68,19 +98,7 @@ if not os.path.exists(config_file):
     with open(config_file, 'w') as f:
         config.write(f)
 else:
-    config.read(config_file)
-    changed = False
-    for section, options in default_config.items():
-        if not config.has_section(section):
-            config.add_section(section)
-            changed = True
-        for key, value in options.items():
-            if not config.has_option(section, key):
-                config.set(section, key, value)
-                changed = True
-    if changed:
-        with open(config_file, 'w') as f:
-            config.write(f)
+    config = load_config(config, config_file, default_config)
             
 LANGUAGE = config.get('General', 'language', fallback='en')
 BASE_DIR = config['General']['base_dir']
