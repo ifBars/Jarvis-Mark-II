@@ -3,22 +3,31 @@ import spotipy
 from spotipy.oauth2 import SpotifyPKCE
 from config import SPOTIFY_CLIENT_ID
 
-# Authenticate using PKCE
-sp = spotipy.Spotify(auth_manager=SpotifyPKCE(
-    client_id=SPOTIFY_CLIENT_ID, 
-    redirect_uri="http://127.0.0.1:8888/callback",
-    scope="user-modify-playback-state,user-read-playback-state,user-top-read",
-    cache_path=".spotify_cache.json"  # Store token locally
-))
+sp = None
+
+if SPOTIFY_CLIENT_ID == "your_spotify_app_client_id":
+    input("Spotify client id is not set in config.ini, spotify module will not work, press enter to confirm this...")
+else:
+    # Authenticate using PKCE
+    sp = spotipy.Spotify(auth_manager=SpotifyPKCE(
+        client_id=SPOTIFY_CLIENT_ID, 
+        redirect_uri="http://127.0.0.1:8888/callback",
+        scope="user-modify-playback-state,user-read-playback-state,user-top-read",
+        cache_path=".spotify_cache.json"  # Store token locally
+    ))
 
 # Get active device
-devices = sp.devices()
+devices = None
 device_id = None
+playlist_data = None
+user_playlists = None
 
-playlist_data = sp.current_user_playlists()
-user_playlists = ','.join([r["name"] for r in playlist_data["items"]])
+if sp:
+    devices = sp.devices()
+    playlist_data = sp.current_user_playlists()
+    user_playlists = ','.join([r["name"] for r in playlist_data["items"]])
 
-if devices["devices"]:
+if devices and devices["devices"]:
     device_id = devices["devices"][0]["id"]  # Select first active device
 else:
     print("No active Spotify device found!")

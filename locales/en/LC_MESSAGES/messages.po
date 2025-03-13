@@ -110,3 +110,6 @@ msgstr "Loading personality: {personality_name}"
 
 msgid "Warning: Personality '{personality_name}' not found. Falling back to 'jarvis'."
 msgstr "Warning: Personality '{personality_name}' not found. Falling back to 'jarvis'."
+
+msgid "OBS is not running. Please start OBS as administrator and then press Enter to retry..."
+msgstr "OBS is not running. Please start OBS as administrator and then press Enter to retry..."
