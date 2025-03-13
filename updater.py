@@ -53,7 +53,7 @@ def perform_update():
     Assumes this script is executed in the repository's root directory.
     """
     branch = "main"
-    pull_cmd = ["git", "pull", "upstream", branch]
+    pull_cmd = ["git", "pull", "origin", branch]
     print(_("Updating Jarvis with command:"))
     print(" ".join(pull_cmd))
     try:
