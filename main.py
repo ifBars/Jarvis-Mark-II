@@ -1,10 +1,10 @@
 from input_listener import is_t_pressed
 from updater import check_for_update
-from audio import process_audio, speak, close_audio
+from audio import process_audio, speak, close_audio, stop_speech
 from chat import send_to_jarvis
 from exit import should_exit
 from commands import process_command
-from config import INPUT_START_KEY
+from config import INPUT_START_KEY, INTERRUPT_JARVIS
 from localization import _
 
 def main():
@@ -12,6 +12,9 @@ def main():
     try:
         while True:
             if is_t_pressed():
+
+                if INTERRUPT_JARVIS: stop_speech()
+                
                 print(_("Listening..."))
                 transcribed_text = process_audio(is_t_pressed)
                 if transcribed_text:

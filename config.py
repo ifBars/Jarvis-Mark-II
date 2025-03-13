@@ -8,7 +8,7 @@ from pathlib import Path
 def update_language(lang):
     """Update the language setting in the config file."""
     config.set("Settings", "language", lang)
-    with open(CONFIG_FILE, "w") as configfile:
+    with open(config_file, "w") as configfile:
         config.write(configfile)
     print(_("Language updated to {lang}. Restart the application to apply changes.").format(lang=lang))
     
@@ -25,7 +25,9 @@ default_config = {
         'base_dir': r'C:\Jarvis-Mark-II',
         'api_key': 'your_api_key',
         'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
-        'personality': 'jarvis'
+        'personality': 'jarvis',
+        'interrupt_jarvis': 'true',
+        'enabled_modules': 'main_module\nmusic_module\nobs_module\nspotify_module'
     },
     'Gemini': {
         'model': 'gemini-2.0-flash'
@@ -46,6 +48,9 @@ default_config = {
         'port': '4455',
         'password': 'password',
         'websocket_library': 'obsws-python'
+    },
+    'Spotify': {
+        'client_id': 'your_spotify_app_client_id'
     },
     'Sounds': {
         'sounds_dir': 'sounds'
@@ -81,9 +86,12 @@ LANGUAGE = config.get('General', 'language', fallback='en')
 BASE_DIR = config['General']['base_dir']
 API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
+ENABLED_MODULES = config['General']['enabled_modules'].splitlines()
 PERSONALITY = config.get('General', 'personality', fallback='jarvis')
 GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
+SPOTIFY_CLIENT_ID = config['Spotify']['client_id']
 INPUT_START_KEY = config['InputListener']['talk_key']
+INTERRUPT_JARVIS = config['General']['interrupt_jarvis']
 VOSK_MODEL_PATH = os.path.join(BASE_DIR, config['Vosk']['model_path'])
 SPEECH_ENGINE = config['Speech']['engine'].lower()
 VB_CABLE = config.getboolean('Speech', 'vb_cable', fallback=False)

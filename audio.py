@@ -83,6 +83,11 @@ def speak(text, rate=170, pitch_factor=0.98):
 
     threading.Thread(target=_speak, daemon=True).start()
 
+def stop_speech():    
+    if speech_channel.get_busy():
+        speech_channel.stop()
+        
+
 if config.SPEECH_ENGINE == "vosk":
     from vosk import Model, KaldiRecognizer
     import pyaudio

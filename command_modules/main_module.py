@@ -126,7 +126,9 @@ def change_volume(amount):
     pygame.mixer.music.set_volume(new_level)
 
 def insta_lock():
-    tx, ty = 1800, 650
+    screen_width, screen_height = pyautogui.size()
+    tx = int(screen_width * 1800 / 1920)
+    ty = int(screen_height * 650 / 1080)
     duration = 0.5
     steps = 50
 
