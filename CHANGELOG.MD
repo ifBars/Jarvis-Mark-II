@@ -104,4 +104,14 @@ Contributions are welcome – please add your entries in the appropriate section
 - **Updated README.MD**
   - Added a tutorial on how to set up the Spotify Module
 
+## [Mark 2.4.2] - March 9th, 2025 (ifBars)
+- **Macros**
+  - Jarvis now has a macro system, that allows users to have Jarvis create macros that run Jarvis commands, and run them upon request.
+  
+- **More Personalities**
+  - Added some ChatGPT generated personalities
+
+- **Improvements to README**
+  - Added Macros & Personalities sections to README
+
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*
