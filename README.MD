@@ -30,10 +30,11 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 
 ## Features
 
+- **Macros:** Users can request to have Jarvis create Macros that can run a set sequence of commands upon request.
 - **Voice Recognition & TTS:** Press and hold the **T** key to activate your microphone; responses are spoken via text-to-speech.
 - **Embedded Command Parsing:** Automatically detects and executes specific in-game commands embedded in the AI’s responses.
 - **OBS Integration:** Control OBS recording and clip saving via WebSocket.
-- **Music Playback:** Play, pause, resume, and skip songs from designated playlists.
+- **Music Playback with Spotify Integration:** Play, pause, resume, and skip songs from designated playlists.
 - **External Configuration:** All settings (e.g., API keys, OBS info, Vosk model paths) are managed via a single `config.ini` file.
 - **Modular Design:** Code is split into modules (`config.py`, `audio.py`, `chat.py`, `commands.py`, etc.) to simplify contributions and future extensions.
 
