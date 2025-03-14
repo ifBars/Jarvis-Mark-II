@@ -96,12 +96,22 @@ Contributions are welcome – please add your entries in the appropriate section
   **Interrupt Jarvis**
   Jarvis stops talking when you press the key to talk. Can be toggled off in config.ini
 
-## [Mark 2.4.1] - March 10th, 2025 (Supereiris)
+## [Mark 2.4.1] - March 11th, 2025 (Supereiris)
 - **Toggleable Modules**
   - Modules can now be enabled/disabled in config.ini.
   - To disable a module just comment out the line by placing a ';' in the start.
 
 - **Updated README.MD**
   - Added a tutorial on how to set up the Spotify Module
+
+## [Mark 2.4.2] - March 13th, 2025 (ifBars)
+- **Macros**
+  - Jarvis now has a macro system, that allows users to have Jarvis create macros that run Jarvis commands, and run them upon request.
+  
+- **More Personalities**
+  - Added some ChatGPT generated personalities
+
+- **Improvements to README**
+  - Added Macros & Personalities sections to README
 
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*
