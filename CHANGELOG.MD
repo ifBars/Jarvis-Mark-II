@@ -96,7 +96,7 @@ Contributions are welcome – please add your entries in the appropriate section
   **Interrupt Jarvis**
   Jarvis stops talking when you press the key to talk. Can be toggled off in config.ini
 
-## [Mark 2.4.1] - March 10th, 2025 (Supereiris)
+## [Mark 2.4.1] - March 11th, 2025 (Supereiris)
 - **Toggleable Modules**
   - Modules can now be enabled/disabled in config.ini.
   - To disable a module just comment out the line by placing a ';' in the start.
