@@ -2,9 +2,31 @@ from tasks import add_task
 from command_modules_init import all_commands
 
 def extract_content(response, i):
-    j = response.find(")", i)
-    if j != -1:
-        return response[i+4:j], j
+    """
+    Extracts the content inside matching parentheses starting at index i.
+    Assumes that response[i:i+3] is a command token and that response[i+3] is '('.
+    
+    Changes made:
+    - Instead of simply finding the next closing parenthesis, we now count nested parentheses.
+    - A counter (count) is incremented for each '(' and decremented for each ')'.
+    - This ensures that if a command contains nested parentheses (e.g., "prs(shift)"), we correctly
+      locate the matching closing parenthesis for the outer command.
+    - The function returns a tuple: (extracted content, index of the closing parenthesis).
+    """
+    if response[i+3] != '(':
+        return None, i
+    start = i + 4  # start after the opening parenthesis
+    count = 1
+    j = start
+    while j < len(response) and count:
+        if response[j] == '(':
+            count += 1
+        elif response[j] == ')':
+            count -= 1
+        j += 1
+    if count == 0:
+        # j is now one past the matching ')', so the content ends at j-1
+        return response[start:j-1], j-1
     return None, i
 
 def process_command(response):
