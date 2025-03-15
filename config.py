@@ -109,6 +109,7 @@ default_config = {
         'api_key': 'your_api_key',
         'voice_key': r'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enGB_GeorgeM',
         'personality': 'jarvis',
+        'ultron_startup': 'true',
         'interrupt_jarvis': 'true',
         'enabled_modules': 'main_module\nmusic_module\nobs_module\nspotify_module\nmacro_module'
     },
@@ -162,6 +163,7 @@ API_KEY = config['General']['api_key']
 VOICE_KEY = config['General']['voice_key']
 ENABLED_MODULES = config['General']['enabled_modules'].splitlines()
 PERSONALITY = config.get('General', 'personality', fallback='jarvis')
+ULTRON_STARTUP = config.getboolean('General', 'ultron_startup', fallback=True)
 GEMINI_MODEL = config.get('Gemini', 'model', fallback='gemini-2.0-flash')
 SPOTIFY_CLIENT_ID = config['Spotify']['client_id']
 INPUT_START_KEY = config['InputListener']['talk_key']

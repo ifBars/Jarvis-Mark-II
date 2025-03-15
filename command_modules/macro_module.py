@@ -71,10 +71,13 @@ def run_macro(content):
     return (None, ())
 
 def get_macros():
-    """Return a list of macro JSON files in MACRO_DIR (each representing a macro)."""
+    """Return a list of macro names from JSON files in MACRO_DIR (each representing a macro) without the .json extension."""
     try:
-        return [f for f in os.listdir(MACRO_DIR) 
-                if f.endswith('.json') and os.path.isfile(os.path.join(MACRO_DIR, f))]
+        return [
+            os.path.splitext(f)[0] 
+            for f in os.listdir(MACRO_DIR)
+            if f.endswith('.json') and os.path.isfile(os.path.join(MACRO_DIR, f))
+        ]
     except Exception as e:
         print(_("Error reading MACRO_DIR:"), e)
         return []
