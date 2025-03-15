@@ -284,7 +284,7 @@ Collaborators can easily add support for new languages by following these steps:
    - If you are getting this error when setting up the spotify module, usually this is caused by attempted to connect your spotify account to the wrong spotify app. Ensure your client_id in config.ini matches your client_id from the spotify developer page of your created spotify app.
 
 7. **Couldn't find ffpmeg or avconv**
-   - This means you do not have ffpmeg installed, however Jarvis should still function just fine. So as long as your Jarvis is still working correctly, you can safely ignore this error. Otherwise ask for help in the discord.
+   - This means you do not have ffpmeg installed, however Jarvis uses de-compressed audio files, so ffmpeg is not needed. So as long as your Jarvis is still working correctly, you can safely ignore this error. Otherwise ask for help in the discord.
 
 ## Changelog
 
