@@ -114,4 +114,11 @@ Contributions are welcome – please add your entries in the appropriate section
 - **Improvements to README**
   - Added Macros & Personalities sections to README
 
+## [Mark 2.4.2] - March 13th, 2025 (ifBars)
+- **Macros Bug Fix**
+  - Fixed the bug where Jarvis had issues finding your macros directory
+
+- **Fast Whisper Support**
+  - Jarvis now supports the Fast Whisper model for speech recognition via setting engine to fast_whisper in config
+
 *This release is based on Patchi's Mark 2 implementation and modularized by multiple contributors. Contributions and pull requests are welcome!*

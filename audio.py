@@ -165,5 +165,73 @@ elif config.SPEECH_ENGINE == "speech_recognition":
     def close_audio():
         pass
 
+elif config.SPEECH_ENGINE == "faster_whisper":
+    from faster_whisper import WhisperModel
+    import pyaudio
+    import wave
+    import io
+    import tempfile
+    import os
+    import torch
+
+    # Determine the computation device (use GPU if available)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    compute_type = "float16" if device == "cuda" else "int8"
+    # Initialize the Whisper model (choose an appropriate model size, e.g. "small", "base", "medium", etc.)
+    model = WhisperModel("small", device=device, compute_type=compute_type)
+
+    # Initialize PyAudio and open the microphone stream
+    mic = pyaudio.PyAudio()
+    stream = mic.open(
+        format=pyaudio.paInt16,
+        channels=1,
+        rate=16000,
+        input=True,
+        frames_per_buffer=8192
+    )
+
+    def process_audio(is_t_pressed):
+        """
+        Capture audio while the T key is held.
+        Convert the captured audio frames into a temporary WAV file,
+        then transcribe it using fast-whisper.
+        Returns the transcribed text.
+        """
+        audio_frames = []
+        while is_t_pressed():
+            data = stream.read(4096, exception_on_overflow=False)
+            audio_frames.append(data)
+        if audio_frames:
+            # Combine the audio frames and convert them to a WAV file in memory
+            audio_data = b"".join(audio_frames)
+            wav_buffer = io.BytesIO()
+            with wave.open(wav_buffer, "wb") as wf:
+                wf.setnchannels(1)
+                wf.setsampwidth(mic.get_sample_size(pyaudio.paInt16))
+                wf.setframerate(16000)
+                wf.writeframes(audio_data)
+            wav_bytes = wav_buffer.getvalue()
+
+            # Write the WAV bytes to a temporary file
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
+                tmp.write(wav_bytes)
+                tmp_filename = tmp.name
+
+            try:
+                # Transcribe the audio file using fast-whisper.
+                # This returns a list of segments and additional info.
+                segments, info = model.transcribe(tmp_filename)
+                # Combine the segments to form the full transcript.
+                transcript = " ".join([segment.text for segment in segments])
+                return transcript
+            finally:
+                os.remove(tmp_filename)
+        return None
+
+    def close_audio():
+        stream.stop_stream()
+        stream.close()
+        mic.terminate()
+
 else:
     raise ValueError("Invalid speech engine specified in config.ini. Choose 'vosk' or 'speech_recognition'.")

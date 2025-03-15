@@ -9,16 +9,20 @@
     - [Mark 2.1 Installation Video Guide](#mark-21-installation-video-guide)
     - [Mark 2.1 Installation Text Guide](#mark-21-installation-text-guide)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
+  - [Speech Engines](#speech-engines)
+    - [Vosk](#vosk)
+    - [speech\_recognition](#speech_recognition)
+    - [faster\_whisper](#faster_whisper)
   - [Spotify Module Set Up](#spotify-module-set-up)
-  - [Locales](#locales)
-    - [How It Works](#how-it-works)
-    - [Directory Structure](#directory-structure)
-    - [Adding New Languages](#adding-new-languages)
   - [Macros](#macros)
     - [Manually Creating Macros](#manually-creating-macros)
   - [Personalities](#personalities)
     - [Creating a Personality](#creating-a-personality)
     - [Personality Credits](#personality-credits)
+  - [Locales](#locales)
+    - [How It Works](#how-it-works)
+    - [Directory Structure](#directory-structure)
+    - [Adding New Languages](#adding-new-languages)
   - [Common Installation Issues](#common-installation-issues)
   - [Changelog](#changelog)
 
@@ -75,6 +79,22 @@ The installation guide for **Mark 2.0** is available in the Google Doc linked be
 
 *Created by cyburak*
 
+## Speech Engines
+
+Jarvis supports three different speech recognition engines—**vosk**, **speech_recognition**, and **faster_whisper**—each designed to address varying needs in terms of performance, accuracy, and system resource usage. You can switch between the 3 by putting their name as the engine property under the Speech category of your config.ini file.
+
+### Vosk
+
+Vosk is a lightweight engine that shines on low-hardware machines. It can deliver decent results , making it a suitable for lower-end PCs. However, its simplicity comes at the cost of recognition accuracy compared to its peers.
+
+### speech_recognition
+
+In most cases, the **speech_recognition** engine offers better results than vosk while maintaining similar performance. It is well balanced between speed and accuracy, making it a great all-around choice.
+
+### faster_whisper
+
+For users who desire the best accuracy in recognition, **faster_whisper** is the top performer. Leveraging advanced algorithms from OpenAI, it provides state-of-the-art recognition quality that outperforms the other two engines. The trade-off is its higher system resource usage.
+
 ## Spotify Module Set Up
 
 To be able to use the Spotify module of Jarvis you need to create a Spotify Developer App and obtain the Client ID. This guide will walk you through the entire process. (Super Simple!)
@@ -111,6 +131,64 @@ To be able to use the Spotify module of Jarvis you need to create a Spotify Deve
 
 The spotify module should now be working. Beware that some features like 'skip song' require a premium spotify membership to work.
 
+## Macros
+
+Jarvis allows you to automate complex tasks by creating macros—sequences of multiple actions executed in order. You can quickly create macros through simple voice commands. For example:
+
+> "Jarvis, create a new macro to initiate flight for 3 seconds, then stop flying, wait 1 second, fire 5 shots, and save it as fly and shoot."
+
+Jarvis supports using any existing commands within macros. Adding brief delays (e.g., a 1-second wait) between actions can greatly improve macro reliability. Without appropriate delays, certain actions may overlap or fail to execute correctly. In the above example, firing immediately after stopping flight might result in the first shot failing because the action to stop flying hasn't fully completed yet.
+
+### Manually Creating Macros
+
+Alternatively, you can manually create macros by adding a new JSON file within the `macros` folder. Use hyphens (`-`) or underscores (`_`) instead of spaces for file names. For instance, a macro named `fly-and-shoot.json` would contain:
+
+```json
+{
+  "name": "fly-and-shoot",
+  "commands": ["prs(shift)", "dly(3)", "prs(shift)", "dly(1)", "fre(5)"]
+}
+```
+
+## Personalities
+
+Jarvis supports different "personalities," which are essentially different Gemini system instructions. You can ask Jarvis to load a new personality at any time, and you can also request a list of the available personalities. Alternatively, you can manually change the personality directly from the `config.ini` file.
+
+### Creating a Personality
+
+To create a new personality:
+
+1. **Copy the Base File:**  
+   Duplicate the `personalities/jarvis.json` file from the repository as your starting point.
+
+2. **Rename the File:**  
+   Rename the copied file to match your new personality (for example, `friday.json`, `karen.json`, `ultron.json`, etc.).
+
+3. **Modify the Content:**  
+   Open your new file and update the `"base"` section in each language block (`"en"`, `"es"`, `"pt"`, `"fr"`, etc.) to define the unique tone, style, and behavior of your personality.
+
+4. **Adjust the Ending (Optional):**  
+   Modify the `"ending"` section if necessary, to customize how commands are finalized.
+
+5. **Save and Load:**  
+   Save your changes and load the new personality in your app—either via a command or by editing the `config.ini` file.
+
+For an example of a personality file, refer to the [personalities/jarvis.json](./personalities/jarvis.json) in the repository.
+
+### Personality Credits
+
+We welcome and appreciate community contributions to the personality files! Below is a list of contributors who have added or updated personality files in this repository:
+
+- **Patchi** – Created the original Jarvis personality
+- **tschadov** – Created the Heimdall personality
+- **ChatGPT Generated Personalities** – Friday, Karen, Ultron (These are encouraged to community improvements/modifications)
+
+If you've created or modified a personality and would like to be credited, please follow these guidelines:
+
+1. **Pull Request Details:**  
+   When submitting a pull request with a new or updated personality, add your credit here so this list can be up-to-date.
+
+Thank you for helping build a forward-thinking community!
 
 ## Locales
 
@@ -184,65 +262,6 @@ Collaborators can easily add support for new languages by following these steps:
 
 6. **Update Configurations:**  
    To test your new language, update the `language` setting in `config.ini` to your new language code (e.g., `de`) and run Jarvis.
-
-## Macros
-
-Jarvis allows you to automate complex tasks by creating macros—sequences of multiple actions executed in order. You can quickly create macros through simple voice commands. For example:
-
-> "Jarvis, create a new macro to initiate flight for 3 seconds, then stop flying, wait 1 second, fire 5 shots, and save it as fly and shoot."
-
-Jarvis supports using any existing commands within macros. Adding brief delays (e.g., a 1-second wait) between actions can greatly improve macro reliability. Without appropriate delays, certain actions may overlap or fail to execute correctly. In the above example, firing immediately after stopping flight might result in the first shot failing because the action to stop flying hasn't fully completed yet.
-
-### Manually Creating Macros
-
-Alternatively, you can manually create macros by adding a new JSON file within the `macros` folder. Use hyphens (`-`) or underscores (`_`) instead of spaces for file names. For instance, a macro named `fly-and-shoot.json` would contain:
-
-```json
-{
-  "name": "fly-and-shoot",
-  "commands": ["prs(shift)", "dly(3)", "prs(shift)", "dly(1)", "fre(5)"]
-}
-```
-
-## Personalities
-
-Jarvis supports different "personalities," which are essentially different Gemini system instructions. You can ask Jarvis to load a new personality at any time, and you can also request a list of the available personalities. Alternatively, you can manually change the personality directly from the `config.ini` file.
-
-### Creating a Personality
-
-To create a new personality:
-
-1. **Copy the Base File:**  
-   Duplicate the `personalities/jarvis.json` file from the repository as your starting point.
-
-2. **Rename the File:**  
-   Rename the copied file to match your new personality (for example, `friday.json`, `karen.json`, `ultron.json`, etc.).
-
-3. **Modify the Content:**  
-   Open your new file and update the `"base"` section in each language block (`"en"`, `"es"`, `"pt"`, `"fr"`, etc.) to define the unique tone, style, and behavior of your personality.
-
-4. **Adjust the Ending (Optional):**  
-   Modify the `"ending"` section if necessary, to customize how commands are finalized.
-
-5. **Save and Load:**  
-   Save your changes and load the new personality in your app—either via a command or by editing the `config.ini` file.
-
-For an example of a personality file, refer to the [personalities/jarvis.json](./personalities/jarvis.json) in the repository.
-
-### Personality Credits
-
-We welcome and appreciate community contributions to the personality files! Below is a list of contributors who have added or updated personality files in this repository:
-
-- **Patchi** – Created the original Jarvis personality
-- **tschadov** – Created the Heimdall personality
-- **ChatGPT Generated Personalities** – Friday, Karen, Ultron (These are encouraged to community improvements/modifications)
-
-If you've created or modified a personality and would like to be credited, please follow these guidelines:
-
-1. **Pull Request Details:**  
-   When submitting a pull request with a new or updated personality, add your credit here so this list can be up-to-date.
-
-Thank you for helping build a forward-thinking community!
 
 ## Common Installation Issues
 
