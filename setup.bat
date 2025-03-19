@@ -151,6 +151,9 @@ if errorlevel 1 (
     powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.1/Git-2.42.0-64-bit.exe' -OutFile '%ORIGINAL_PATH%\git_installer.exe'"
     start /wait "" "%ORIGINAL_PATH%\git_installer.exe" /VERYSILENT /NORESTART
     echo %MSG_GIT_INSTALLED%
+
+    set "GIT_PATH=C:\Program Files\Git\cmd"
+    set "PATH=%GIT_PATH%;%PATH%"
 ) else (
     echo %MSG_GIT_ALREADY_INSTALLED%
 )
