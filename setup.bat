@@ -316,7 +316,7 @@ goto Dependencies
 echo.
 REM Install Python dependencies
 echo %MSG_INSTALLING_DEPENDENCIES%
-start /wait "Installing pip dependencies" cmd /c "python -m pip install --upgrade pip && pip install --upgrade setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
+start /wait "Installing pip dependencies" cmd /c "python -m pip install --upgrade pip && pip install --upgrade cython setuptools wheel && pip install -r "%ORIGINAL_PATH%\requirements.txt" || pause"
 if errorlevel 1 (
     echo ERROR: Failed to install dependencies.
     pause

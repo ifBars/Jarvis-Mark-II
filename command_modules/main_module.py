@@ -32,7 +32,7 @@ available_personalities = ", ".join(get_personality_names())
 
 command_handlers = {
         "prs": lambda content: (press, (content)),
-        "msg": lambda content: (chat, (content.strip()[:-4].strip(' ",'), content.lower().endswith("true"))),
+        "msg": lambda content: (chat, (content.strip()[:-(5 if content.lower().endswith("false") else 4)].strip(' ",'), content.lower().endswith("true"))),
         "ply": lambda content: (play_sound, (content)),
         "dly": lambda content: (time.sleep, (float(content))),
         "vls": lambda content: (set_volume, (int(content))),
