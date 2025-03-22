@@ -6,8 +6,8 @@
   - [Overview](#overview)
   - [Features](#features)
   - [Installation Guides](#installation-guides)
-    - [Mark 2.1 Installation Video Guide](#mark-21-installation-video-guide)
-    - [Mark 2.1 Installation Text Guide](#mark-21-installation-text-guide)
+    - [Mark 2.1+ Installation Video Guide](#mark-21-installation-video-guide)
+    - [Mark 2.1+ Installation Text Guide](#mark-21-installation-text-guide)
     - [Mark 2.0 Installation Google Doc](#mark-20-installation-google-doc)
   - [Speech Engines](#speech-engines)
     - [Vosk](#vosk)
@@ -44,11 +44,11 @@ Jarvis is a modular, voice-controlled AI assistant inspired by Iron Man's system
 
 ## Installation Guides
 
-### Mark 2.1 Installation Video Guide
+### Mark 2.1+ Installation Video Guide
 
 [https://www.youtube.com/watch?v=AaZ1x0DO-ZE](https://www.youtube.com/watch?v=AaZ1x0DO-ZE)
 
-### Mark 2.1 Installation Text Guide
+### Mark 2.1+ Installation Text Guide
 
 1. **Download the Repository:**
    - **With Git:**  
@@ -269,7 +269,7 @@ Collaborators can easily add support for new languages by following these steps:
    - Any error relating to audioop, usually arises when you are using the latest version of python, 3.13, as audioop was removed from python in this version. This means if you are using python 3.13 or later, you will need to install [audioop-lts](https://pypi.org/project/audioop-lts/). The setup.bat should handle this for you, but in the case it doesn't and you get an audioop error, this is why, and installing it via pip should fix your issue.
   
 2. **No module named pynput**
-   - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error, jarvis folder, and config.ini
+   - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error
 
 3. **No such file or directory**
    - Usually this means your base_dir in config.ini is not set correctly, you can try running setup.bat again, or setting the base_dir manually.
@@ -285,6 +285,9 @@ Collaborators can easily add support for new languages by following these steps:
 
 7. **Couldn't find ffpmeg or avconv**
    - This means you do not have ffpmeg installed, however Jarvis uses de-compressed audio files, so ffmpeg is not needed. So as long as your Jarvis is still working correctly, you can safely ignore this error. Otherwise ask for help in the discord.
+
+8. **'pip' is not recognized as an internal or external command**
+   - This means windows cannot find pip. This is usually a PATH or App Execution Alias Error. Make sure you have all 3 of your python PATH variables set (main dir, scripts, & launcher). Also make sure you search 'App Execution Alias' in the search bar of windows, open the first option, and disable anything that has python in the name.
 
 ## Changelog
 
