@@ -269,7 +269,7 @@ Collaborators can easily add support for new languages by following these steps:
    - Any error relating to audioop, usually arises when you are using the latest version of python, 3.13, as audioop was removed from python in this version. This means if you are using python 3.13 or later, you will need to install [audioop-lts](https://pypi.org/project/audioop-lts/). The setup.bat should handle this for you, but in the case it doesn't and you get an audioop error, this is why, and installing it via pip should fix your issue.
   
 2. **No module named pynput**
-   - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error, jarvis folder, and config.ini
+   - Did you run the setup.bat first? If so, please seek help in the discord with screenshots of your error
 
 3. **No such file or directory**
    - Usually this means your base_dir in config.ini is not set correctly, you can try running setup.bat again, or setting the base_dir manually.
