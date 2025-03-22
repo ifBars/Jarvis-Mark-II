@@ -133,7 +133,7 @@ if errorlevel 1 (
     start "" /wait "%ORIGINAL_PATH%\python_installer.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1
 
     REM Manually update PATH in this session (adjust path if necessary)
-    set "PYTHON_DIR=C:\Program Files\Python310\"
+    set "PYTHON_DIR=C:\Program Files\Python312\"
     set "PATH=%PYTHON_DIR%;%PYTHON_DIR%Scripts\;%PATH%"
     
     echo %MSG_PYTHON_FINISHED%
@@ -150,10 +150,11 @@ if errorlevel 1 (
     
     powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.1/Git-2.42.0-64-bit.exe' -OutFile '%ORIGINAL_PATH%\git_installer.exe'"
     start /wait "" "%ORIGINAL_PATH%\git_installer.exe" /VERYSILENT /NORESTART
-    echo %MSG_GIT_INSTALLED%
 
     set "GIT_PATH=C:\Program Files\Git\cmd"
     set "PATH=%GIT_PATH%;%PATH%"
+
+    echo %MSG_GIT_INSTALLED%
 ) else (
     echo %MSG_GIT_ALREADY_INSTALLED%
 )

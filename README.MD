@@ -286,6 +286,9 @@ Collaborators can easily add support for new languages by following these steps:
 7. **Couldn't find ffpmeg or avconv**
    - This means you do not have ffpmeg installed, however Jarvis uses de-compressed audio files, so ffmpeg is not needed. So as long as your Jarvis is still working correctly, you can safely ignore this error. Otherwise ask for help in the discord.
 
+8. **'pip' is not recognized as an internal or external command**
+   - This means windows cannot find pip. This is usually a PATH or App Execution Alias Error. Make sure you have all 3 of your python PATH variables set (main dir, scripts, & launcher). Also make sure you search 'App Execution Alias' in the search bar of windows, open the first option, and disable anything that has python in the name.
+
 ## Changelog
 
 For a detailed list of changes and updates, please refer to the [CHANGELOG.MD](CHANGELOG.MD) file.
